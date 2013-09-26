@@ -63,6 +63,8 @@ The example project needs to be placed in $(OFX_ROOT)/apps/myApps
 
 Right now, the best place to start is by modifying this example. 
 
+Github disallows files over 100mb in size. The project requires libcef.dll (about 203mb), so this dependency is included as a zipped file, which brings it down to about 30mb. Just unzip libcef.zip in the ofxCEFClientExample\bin directory. 
+
 ## HTML/JS in C++?
 [Awesomium](http://www.awesomium.com/) is another implementation of this idea (ofxAwesomium), and while free for apps making under 100k in revenue, isn't OSS. librocket is another variation but approaches it differently, instead using a custom HTML/CSS parser to draw interface elements.
 
