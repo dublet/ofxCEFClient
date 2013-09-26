@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\testApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\ofxCEFClient.cpp">
+      <Filter>addons\ofxCEFClient</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client.cpp">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_app.cpp">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_app_delegates.cpp">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_binding_manager.cpp">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_cli.cpp">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_handler.cpp">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_renderer.cpp">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_win.cpp">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\string_util.cpp">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEF">
+      <UniqueIdentifier>{75bd2b5c-9da5-4bc9-9fde-433b3f1a8836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEF\Internal">
+      <UniqueIdentifier>{9e7932fa-c79b-4d52-beba-12ff7a540383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEF\Wrapper">
+      <UniqueIdentifier>{6cc61ca3-1b76-460a-bfb7-2c9acd269b93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{386268a5-8fc1-452c-8cd1-ddc18182996c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCEFClient">
+      <UniqueIdentifier>{123bd4f6-b6e7-4c2a-9a5f-34197cd4421e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCEFClient\Client">
+      <UniqueIdentifier>{5d8505a2-8e44-49aa-b27f-94a2e866e2e9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\testApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\ofxCEFClient.h">
+      <Filter>addons\ofxCEFClient</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client.h">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_app.h">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_binding_manager.h">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_cli.h">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_handler.h">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_renderer.h">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\string_util.h">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_zip_reader.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_app.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_base.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_browser.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_browser_process_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_callback.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_client.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_command_line.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_context_menu_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_cookie.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_dialog_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_display_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_dom.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_download_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_download_item.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_drag_data.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_drag_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_focus_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_frame.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_geolocation.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_geolocation_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_jsdialog_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_keyboard_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_life_span_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_load_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_menu_model.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_origin_whitelist.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_pack_resources.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_pack_strings.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_path_util.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_process_message.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_process_util.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_render_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_render_process_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_request.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_request_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_resource_bundle_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_resource_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_response.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_runnable.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_scheme.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_stream.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_string_visitor.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_task.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_trace.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_trace_event.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_url.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_urlrequest.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_v8.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_values.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_version.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_web_plugin.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_xml_reader.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_byte_read_handler.h">
+      <Filter>CEF\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_stream_resource_handler.h">
+      <Filter>CEF\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_xml_object.h">
+      <Filter>CEF\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_zip_archive.h">
+      <Filter>CEF\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_types.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_wrappers.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_time.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_tuple.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_types.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_types_win.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_types_wrappers.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_win.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_build.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_export.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_ptr.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_list.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_map.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_multimap.h">
+      <Filter>CEF\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\util.h">
+      <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>

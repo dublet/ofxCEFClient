@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ofxCEF</RootNamespace>
+    <ProjectName>ofxCEFClientExample</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\..\third_party\wtl\include;C:\Program Files (x86)\Windows Kits\8.0\Include\shared;C:\Program Files (x86)\Windows Kits\8.0\Include\um;C:\Program Files (x86)\Windows Kits\8.0\Include\winrt;$(VSInstallDir)\VC\atlmfc\include;..\..\..\addons\ofxCEFClient\cef\;..\..\..\addons\ofxCEFClient\src\;..\..\..\addons\ofxCEFClient\src\client;.\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>wininet.lib;dnsapi.lib;version.lib;msimg32.lib;ws2_32.lib;usp10.lib;psapi.lib;dbghelp.lib;winmm.lib;shlwapi.lib;kernel32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;user32.lib;uuid.lib;odbc32.lib;odbccp32.lib;delayimp.lib;comctl32.lib;rpcrt4.lib;opengl32.lib;glu32.lib;$(Configuration)\libcef.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Program Files (x86)/Windows Kits/8.0/Lib/win8/um/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>dbghelp.dll;dwmapi.dll;shell32.dll;uxtheme.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>..\..\..\third_party\wtl\include;C:\Program Files (x86)\Windows Kits\8.0\Include\shared;C:\Program Files (x86)\Windows Kits\8.0\Include\um;C:\Program Files (x86)\Windows Kits\8.0\Include\winrt;$(VSInstallDir)\VC\atlmfc\include;..\..\..\addons\ofxCEFClient\cef\;..\..\..\addons\ofxCEFClient\src;..\..\..\addons\ofxCEFClient\src\client;.\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>wininet.lib;dnsapi.lib;version.lib;msimg32.lib;ws2_32.lib;usp10.lib;psapi.lib;dbghelp.lib;winmm.lib;shlwapi.lib;kernel32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;user32.lib;uuid.lib;odbc32.lib;odbccp32.lib;delayimp.lib;comctl32.lib;rpcrt4.lib;opengl32.lib;glu32.lib;$(Configuration)\libcef.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Program Files (x86)/Windows Kits/8.0/Lib/win8/um/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_app.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_app_delegates.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_binding_manager.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_cli.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_handler.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_renderer.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\client_win.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\client\string_util.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\src\ofxCEFClient.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\testApp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_app.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_base.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_browser.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_browser_process_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_callback.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_client.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_command_line.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_context_menu_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_cookie.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_dialog_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_display_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_dom.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_download_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_download_item.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_drag_data.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_drag_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_focus_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_frame.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_geolocation.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_geolocation_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_jsdialog_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_keyboard_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_life_span_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_load_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_menu_model.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_origin_whitelist.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_pack_resources.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_pack_strings.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_path_util.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_process_message.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_process_util.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_render_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_render_process_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_request.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_request_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_resource_bundle_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_resource_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_response.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_runnable.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_scheme.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_stream.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_string_visitor.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_task.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_trace.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_trace_event.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_url.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_urlrequest.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_v8.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_values.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_version.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_web_plugin.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_xml_reader.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_zip_reader.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_build.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_export.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_ptr.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_list.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_map.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_multimap.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_types.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_wrappers.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_time.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_tuple.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_types.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_types_win.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_types_wrappers.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_win.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_byte_read_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_stream_resource_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_xml_object.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_zip_archive.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_app.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_binding_manager.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_cli.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_handler.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\client_renderer.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\string_util.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\util.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\src\ofxCEFClient.h" />
+    <ClInclude Include="src\testApp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
+      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcef_dll_wrapper.vcxproj">
+      <Project>{a9d6dc71-c0dc-4549-aea0-3b15b44e86a9}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
