@@ -59,9 +59,9 @@ function sendMessage() {
 The example project comes with an HTML5-Boilerlate based template.
 
 ## Project Setup
-The example project should be placed in $(OFX_ROOT)/apps/myApps
+The example project needs to be placed in $(OFX_ROOT)/apps/myApps
 
-Right now, best place to start is by modifying this example. 
+Right now, the best place to start is by modifying this example. 
 
 ## HTML/JS in C++?
 [Awesomium](http://www.awesomium.com/) is another implementation of this idea (ofxAwesomium), and while free for apps making under 100k in revenue, isn't OSS. librocket is another variation but approaches it differently, instead using a custom HTML/CSS parser to draw interface elements.

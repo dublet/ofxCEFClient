@@ -1,0 +1,20 @@
+[Bb]uild/
+[Oo]bj/
+*.o
+*.mode*
+*.app/
+*.pyc
+.svn/
+*.log
+*.sdf
+*.opensdf
+*.suo
+*.pdb
+*.ilk
+*.aps
+ipch/
+#Windows
+# Windows image file caches
+Thumbs.db
+# Folder config file
+Desktop.ini
