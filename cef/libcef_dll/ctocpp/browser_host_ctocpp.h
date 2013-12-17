@@ -44,7 +44,7 @@ class CefBrowserHostCToCpp
   virtual CefWindowHandle GetWindowHandle() OVERRIDE;
   virtual CefWindowHandle GetOpenerWindowHandle() OVERRIDE;
   virtual CefRefPtr<CefClient> GetClient() OVERRIDE;
-  virtual CefString GetDevToolsURL(bool http_scheme) OVERRIDE;
+  virtual CefRefPtr<CefRequestContext> GetRequestContext() OVERRIDE;
   virtual double GetZoomLevel() OVERRIDE;
   virtual void SetZoomLevel(double zoomLevel) OVERRIDE;
   virtual void RunFileDialog(FileDialogMode mode, const CefString& title,
@@ -52,6 +52,14 @@ class CefBrowserHostCToCpp
       const std::vector<CefString>& accept_types,
       CefRefPtr<CefRunFileDialogCallback> callback) OVERRIDE;
   virtual void StartDownload(const CefString& url) OVERRIDE;
+  virtual void Print() OVERRIDE;
+  virtual void Find(int identifier, const CefString& searchText, bool forward,
+      bool matchCase, bool findNext) OVERRIDE;
+  virtual void StopFinding(bool clearSelection) OVERRIDE;
+  virtual void ShowDevTools(const CefWindowInfo& windowInfo,
+      CefRefPtr<CefClient> client,
+      const CefBrowserSettings& settings) OVERRIDE;
+  virtual void CloseDevTools() OVERRIDE;
   virtual void SetMouseCursorChangeDisabled(bool disabled) OVERRIDE;
   virtual bool IsMouseCursorChangeDisabled() OVERRIDE;
   virtual bool IsWindowRenderingDisabled() OVERRIDE;
