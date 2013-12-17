@@ -155,14 +155,6 @@ void ClientHandler::OnBeforeContextMenu(
 		// Add a separator if the menu already has items.
 		if (model->GetCount() > 0)
 			model->AddSeparator();
-
-		CefString devtools_url = browser->GetHost()->GetDevToolsURL(true);
-		if (devtools_url.empty()) {
-		    //  m_OpenDevToolsURLs.find(devtools_url) != m_OpenDevToolsURLs.end()) {
-			// Disable the menu option if DevTools isn't enabled or if a window is
-			// already open for the current URL.
-		}
-
 	}
 }
 
@@ -600,6 +592,9 @@ void ClientHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type
 	this->width = width;
 	this->height = height; 
 
+	// Nerp -- fix this 
+	ofxClient->loadTex(NULL); 
+
 }
 
 void ClientHandler::OnCursorChange(CefRefPtr<CefBrowser> browser,
@@ -658,7 +653,10 @@ std::string ClientHandler::GetLastDownloadFile()
 
 void ClientHandler::ShowDevTools(CefRefPtr<CefBrowser> browser)
 {
+	
+	/* 
 	std::string devtools_url = browser->GetHost()->GetDevToolsURL(true);
+
 	if (!devtools_url.empty()) {
 		if (m_bExternalDevTools) {
 			// Open DevTools in an external browser window.
@@ -671,6 +669,7 @@ void ClientHandler::ShowDevTools(CefRefPtr<CefBrowser> browser)
 			    "window.open('" +  devtools_url + "');", "about:blank", 0);
 		}
 	}
+	*/ 
 }
 
 // static
@@ -787,6 +786,7 @@ void ClientHandler::SendNotification(NotificationType type)
 	}
 	*/
 	// PostMessage(m_MainHwnd, WM_COMMAND, id, 0);
+	
 }
 
 void ClientHandler::SetLoading(bool isLoading)

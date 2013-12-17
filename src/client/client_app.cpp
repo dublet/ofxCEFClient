@@ -34,6 +34,7 @@ namespace {
 		} else if (value->IsDouble()) {
 			list->SetDouble(index, value->GetDoubleValue());
 		}
+
 	}
 
 	// Transfer a V8 array to a List.
@@ -232,6 +233,7 @@ void ClientApp::OnContextInitialized()
 	BrowserDelegateSet::iterator it = browser_delegates_.begin();
 	for (; it != browser_delegates_.end(); ++it)
 		(*it)->OnContextInitialized(this);
+
 }
 
 void ClientApp::OnBeforeChildProcessLaunch(
@@ -257,8 +259,7 @@ void ClientApp::OnRenderThreadCreated(CefRefPtr<CefListValue> extra_info)
 		(*it)->OnRenderThreadCreated(this, extra_info);
 }
 
-void ClientApp::OnWebKitInitialized()
-{
+void ClientApp::OnWebKitInitialized() {
 
 	ofLogNotice() << (__FUNCTION__) << std::endl;
 
@@ -310,6 +311,7 @@ void ClientApp::OnBrowserDestroyed(CefRefPtr<CefBrowser> browser)
 		(*it)->OnBrowserDestroyed(this, browser);
 }
 
+/* 
 bool ClientApp::OnBeforeNavigation(CefRefPtr<CefBrowser> browser,
                                  CefRefPtr<CefFrame> frame,
                                  CefRefPtr<CefRequest> request,
@@ -326,6 +328,7 @@ bool ClientApp::OnBeforeNavigation(CefRefPtr<CefBrowser> browser,
 
 	return false;
 }
+*/ 
 
 void ClientApp::OnContextCreated(CefRefPtr<CefBrowser> browser,
                                CefRefPtr<CefFrame> frame,
@@ -381,12 +384,9 @@ void ClientApp::OnFocusedNodeChanged(CefRefPtr<CefBrowser> browser, CefRefPtr<Ce
 
 }
 
-bool ClientApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message)
-{
+bool ClientApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
 
-	
 	ofLogNotice() << (__FUNCTION__) << std::endl;
-
 
 	ASSERT(source_process == PID_BROWSER);
 
@@ -394,8 +394,7 @@ bool ClientApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProce
 
 	RenderDelegateSet::iterator it = render_delegates_.begin();
 	for (; it != render_delegates_.end() && !handled; ++it) {
-		handled = (*it)->OnProcessMessageReceived(this, browser, source_process,
-		          message);
+		handled = (*it)->OnProcessMessageReceived(this, browser, source_process, message);
 	}
 
 	if (handled)
@@ -405,10 +404,10 @@ bool ClientApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProce
 	if (!callback_map_.empty()) {
 
 		CefString message_name = message->GetName();
-		CallbackMap::const_iterator it = callback_map_.find(
-		                                     std::make_pair(message_name.ToString(),
-		                                             browser->GetIdentifier()));
+		CallbackMap::const_iterator it = callback_map_.find(std::make_pair(message_name.ToString(), browser->GetIdentifier()));
+
 		if (it != callback_map_.end()) {
+
 			// Keep a local reference to the objects. The callback may remove itself
 			// from the callback map.
 			CefRefPtr<CefV8Context> context = it->second.first;
@@ -417,19 +416,19 @@ bool ClientApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProce
 			// Enter the context.
 			context->Enter();
 
-			CefV8ValueList arguments;
+			CefV8ValueList listToJavascript;
 
 			// First argument is the message name.
-			arguments.push_back(CefV8Value::CreateString(message_name));
+			listToJavascript.push_back(CefV8Value::CreateString(message_name));
 
 			// Second argument is the list of message arguments.
 			CefRefPtr<CefListValue> list = message->GetArgumentList();
 			CefRefPtr<CefV8Value> args = CefV8Value::CreateArray(static_cast<int>(list->GetSize()));
 			SetList(list, args);
-			arguments.push_back(args);
+			listToJavascript.push_back(args); 
 
 			// Execute the callback.
-			CefRefPtr<CefV8Value> retval = callback->ExecuteFunction(NULL, arguments);
+			CefRefPtr<CefV8Value> retval = callback->ExecuteFunction(NULL, listToJavascript);
 			if (retval.get()) {
 				if (retval->IsBool())
 					handled = retval->GetBoolValue();

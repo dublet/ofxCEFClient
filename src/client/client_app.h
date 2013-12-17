@@ -19,13 +19,27 @@ public:
 	// http://magpcss.org/ceforum/viewtopic.php?f=6&t=10450
 
 	 virtual void OnBeforeCommandLineProcessing( const CefString& process_type, CefRefPtr<CefCommandLine> command_line) {
+			
+		CefString singleProcess(L"-single-process");
+		command_line->AppendSwitch(singleProcess);
 
-
-		CefString igProxy(L"no-proxy-server");
+		CefString igProxy(L"-no-proxy-server");
 		command_line->AppendSwitch(igProxy);
 
-		CefString addOffscreen(L"off-screen-rendering-enable");
-		command_line->AppendSwitch(addOffscreen);
+		CefString addFile(L"-allow-file-access-from-files");
+		command_line->AppendSwitch(addFile);
+
+		CefString touchEventsDisabled(L"-touch-events=disabled");
+		command_line->AppendSwitch(touchEventsDisabled);
+
+		CefString screenCap(L"-allow-http-screen-capture");
+		command_line->AppendSwitch(screenCap);
+
+		CefString optimizedUI(L"-touch-optimized-ui=disabled");
+		command_line->AppendSwitch(optimizedUI);
+
+		// CefString touchSimulated(L"-simulate-touch-screen-with-mouse");
+		// command_line->AppendSwitch(touchSimulated);
 
 	 }
 
@@ -65,6 +79,7 @@ public:
 		virtual void OnBrowserDestroyed(CefRefPtr<ClientApp> app,
 			CefRefPtr<CefBrowser> browser) {}
 
+		/*
 		virtual bool OnBeforeNavigation(CefRefPtr<ClientApp> app,
 			CefRefPtr<CefBrowser> browser,
 			CefRefPtr<CefFrame> frame,
@@ -73,6 +88,7 @@ public:
 			bool is_redirect) {
 			return false;
 		}
+		*/ 
 
 		virtual void OnContextCreated(CefRefPtr<ClientApp> app,
 			CefRefPtr<CefBrowser> browser,
@@ -175,11 +191,13 @@ private:
 
 	virtual void OnBrowserDestroyed(CefRefPtr<CefBrowser> browser) OVERRIDE;
 
+	/* 
 	virtual bool OnBeforeNavigation(CefRefPtr<CefBrowser> browser,
 		CefRefPtr<CefFrame> frame,
 		CefRefPtr<CefRequest> request,
 		NavigationType navigation_type,
 		bool is_redirect) OVERRIDE;
+	*/ 
 
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser,
 		CefRefPtr<CefFrame> frame,

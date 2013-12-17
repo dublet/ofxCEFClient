@@ -94,9 +94,11 @@ void ClientAppInit(ofxCEFClient *ofx, std::string startResource) {
 	CefWindowInfo info;
 	info.SetAsOffScreen(hWnd);
 	info.SetTransparentPainting(true);
+	//info.SetAsChild(hWnd, rect); 
+	//info.SetAsPopup(hWnd, "hehe"); 
 
 	// Create the new child browser window using an offscreen window
-	CefBrowserHost::CreateBrowser(info, myClientHandler.get(), CefString(startResource), settings);
+	CefBrowserHost::CreateBrowser(info, myClientHandler.get(), CefString(startResource), settings, NULL);
 
 }
 
@@ -111,14 +113,14 @@ void AppQuitMessageLoop() {
 
 	CefRefPtr<CefCommandLine> command_line = AppGetCommandLine();
 
-	if (command_line->HasSwitch(cefclient::kMultiThreadedMessageLoop)) {
+	//if (command_line->HasSwitch(cefclient::kMultiThreadedMessageLoop)) {
 		// Running in multi-threaded message loop mode. Need to execute
 		// PostQuitMessage on the main application thread.
-		ASSERT(hMessageWnd);
-		//PostMessage(hMessageWnd, WM_COMMAND, ID_QUIT, 0);
-	} else {
-		CefQuitMessageLoop();
-	}
+		// ASSERT(hMessageWnd);
+		PostMessage(hMessageWnd, WM_COMMAND, 12, 0);
+	//} else {
+	//	CefQuitMessageLoop();
+	//}
 
 }
 
@@ -126,11 +128,11 @@ LRESULT CALLBACK MessageWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 
 	switch (message) {
 		case WM_COMMAND: {
-				int wmId = LOWORD(wParam);
+				int wmId = wParam;
 				switch (wmId) {
-					//case ID_QUIT:
-					//	PostQuitMessage(0);
-					//	return 0;
+					case 12:
+						PostQuitMessage(0);
+						return 0;
           default:
             break; 
 				}

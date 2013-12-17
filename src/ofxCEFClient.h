@@ -23,6 +23,10 @@ public:
 
 	void messageCallback(CefRefPtr<CefProcessMessage> message); 
 
+	void loadTex(unsigned char *buffer); 
+
+	bool loadingTex; 
+
 private:
 
 	void enableEvents(); 
@@ -44,5 +48,13 @@ private:
 	ofTexture _cef_buffer; 
 
 	bool _initialized; 
+
+	vector< CefRefPtr<CefProcessMessage> > _eventList;
+
+	unsigned char *buffer; 
+	int width;
+	int height; 
+
+	uint32_t lastClick; 
 
 };

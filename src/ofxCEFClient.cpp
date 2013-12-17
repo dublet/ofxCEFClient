@@ -9,7 +9,7 @@ extern CefRefPtr<ClientHandler> myClientHandler;
 
 ofxCEFClient::ofxCEFClient() {
 	
-	_cef_buffer.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA); 
+	_cef_buffer.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, false); 
 
 	_initialized = false; 
 
@@ -41,32 +41,56 @@ void ofxCEFClient::init(std::string startupResource) {
 
 	ofFilePath pathUtil; 
 
-	string startResource = "file:\\" + pathUtil.getCurrentWorkingDirectory() + "\\interface\\index.html"; 
+	string startResource = "file:\\\\" + pathUtil.getCurrentWorkingDirectory() + "interface\\index.html"; 
+
+	ofLogNotice() << "Using Interface Index HTML: \n " << startResource << std::endl; 
 
 	ClientAppInit(this, startResource); 
 
 }
 
 void ofxCEFClient::loop() {
+	
+	// This doesn't work quite right. The idea was to set buffer, width, and height but they return junk values
+	// so the ->doneLoading flag needs to work better.
 
 	if (myClientHandler.get()->hasBrowser() == true && _initialized == false) {
+
 		_initialized = true; 
 		_browserHost = myClientHandler.get()->GetBrowser()->GetHost();
 		enableEvents(); 
+
 	} 
 
-	if (!_initialized) return; 
+	if (!_initialized) {
+		ofLogNotice() << "CEF Client Not Initialized \n";
+		return; 
+	}
+	
+	//  It's really not ideal to set these pointers constantly... 
+	if (loadingTex) {
 
-	unsigned char *buffer = (unsigned char *) myClientHandler.get()->buffer; 
-	int width = myClientHandler.get()->width; 
-	int height = myClientHandler.get()->height; 
+		loadingTex = false; 
+		
+		buffer = (unsigned char *) myClientHandler.get()->buffer; 
+		width = myClientHandler.get()->width; 
+		height = myClientHandler.get()->height; 
 
-	glPixelStorei(GL_UNPACK_ROW_LENGTH, width);
-	glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
-	glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
+		_cef_buffer.loadData(buffer, width, height, GL_BGRA);
 
-	_cef_buffer.loadData(buffer, width, height, GL_BGRA); 
+	}
 
+	// on the main thread..
+	testApp* myApp = (testApp*)ofGetAppPtr();
+	while(_eventList.size() > 0) {
+		myApp->cefMessageCallback(_eventList.back()); // Get the last
+		_eventList.pop_back(); // Pop it off 
+	}
+
+}
+
+void ofxCEFClient::loadTex(unsigned char *buffer) {
+	loadingTex = true; 
 }
 
 
@@ -97,15 +121,25 @@ void ofxCEFClient::_mousePressed(ofMouseEventArgs &e) {
 	int y = e.y;
 	int button = e.button;
 
-	// Yo Dawg, So I heard you like ternaries
 	CefBrowserHost::MouseButtonType btnType = (button == 0 ? MBT_LEFT : ( button == 2 ? MBT_RIGHT : MBT_MIDDLE));
 
 	CefMouseEvent mouse_event;
 	mouse_event.x = x;
 	mouse_event.y = y;
 
+	// Double click vs single click: 
+	int clickCount = 1; 
+
+	unsigned long currClick = ofGetElapsedTimeMillis();
+
+	if(lastClick != 0 && currClick - lastClick < 333) {
+		clickCount = 2; 
+	}
+
+    lastClick = currClick;
+
 	// Mouse Down
-	_browserHost->SendMouseClickEvent(mouse_event, btnType, false, 1); 
+	_browserHost->SendMouseClickEvent(mouse_event, btnType, false, clickCount); 
 															
 }
 
@@ -114,6 +148,12 @@ void ofxCEFClient::_mouseDragged(ofMouseEventArgs &e) {
 	int x = e.x;
 	int y = e.y;
 	int button = e.button;
+
+	CefMouseEvent mouse_event;
+	mouse_event.x = x;
+	mouse_event.y = y;
+
+	_browserHost->SendMouseMoveEvent(mouse_event, false); 
 
 }
 
@@ -164,19 +204,16 @@ void ofxCEFClient::_keyReleased(ofKeyEventArgs &e) {
 
 void ofxCEFClient::_windowResized(ofResizeEventArgs &e) {
 
-	_cef_buffer.clear();
-
-	_cef_buffer.allocate(e.width, e.height, GL_RGBA); 
-
-	_browserHost->WasResized();
-
-	// BUGBUG: Should trigger a render to the browser
+	// BUGBUG: Should trigger a render to the browse
+	// _cef_buffer.clear();
+	// _cef_buffer.allocate(e.width, e.height, GL_RGBA); 
+	//_browserHost->WasResized();
 
 }
 
 void ofxCEFClient::_exit(ofEventArgs &e) {
-
-	// This isn't clean... 
+	
+	myClientHandler->CloseAllBrowsers(true);
 	CefShutdown();
 
 }
@@ -193,8 +230,6 @@ void ofxCEFClient::sendMessage(std::string name, CefRefPtr <CefListValue> messag
 
 void ofxCEFClient::messageCallback(CefRefPtr<CefProcessMessage> message) {
 
-	// TODO: Better callback system (maybe using PocoEvents)
-	testApp* myApp = (testApp*)ofGetAppPtr();
-	myApp->cefMessageCallback(message); 
+	_eventList.push_back(message); 
 
 }

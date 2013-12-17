@@ -54,8 +54,8 @@ void AppGetSettings(CefSettings& settings) {
   settings.multi_threaded_message_loop = true;
 #endif
 
-  CefString(&settings.cache_path) =
-      g_command_line->GetSwitchValue(cefclient::kCachePath);
+  // Set cache path
+  CefString(&settings.cache_path) = g_command_line->GetSwitchValue(cefclient::kCachePath);
 
   // Specify a port to enable DevTools if one isn't already specified.
   if (!g_command_line->HasSwitch("remote-debugging-port"))

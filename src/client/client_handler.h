@@ -244,7 +244,6 @@ class ClientHandler : public CefClient,
 			this->ofxClient = client; 
 		}
 
-
 		void *buffer; 
 		int width;
 		int height; 
