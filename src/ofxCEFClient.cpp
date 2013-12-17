@@ -230,6 +230,6 @@ void ofxCEFClient::sendMessage(std::string name, CefRefPtr <CefListValue> messag
 
 void ofxCEFClient::messageCallback(CefRefPtr<CefProcessMessage> message) {
 
-	_eventList.push_back(message); 
+	_eventList.push_back(message->Copy()); 
 
 }
