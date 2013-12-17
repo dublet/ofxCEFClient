@@ -480,6 +480,12 @@
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\write_handler_cpptoc.h">
       <Filter>libcef_dll\cpptoc</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\request_context_ctocpp.h">
+      <Filter>libcef_dll\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\request_context_handler_cpptoc.h">
+      <Filter>libcef_dll\cpptoc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\transfer_util.cpp">
@@ -735,6 +741,12 @@
       <Filter>libcef_dll\cpptoc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\write_handler_cpptoc.cc">
+      <Filter>libcef_dll\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\request_context_ctocpp.cc">
+      <Filter>libcef_dll\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\request_context_handler_cpptoc.cc">
       <Filter>libcef_dll\cpptoc</Filter>
     </ClCompile>
   </ItemGroup>

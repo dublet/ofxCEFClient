@@ -111,6 +111,7 @@
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\read_handler_cpptoc.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\render_handler_cpptoc.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\render_process_handler_cpptoc.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\request_context_handler_cpptoc.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\request_handler_cpptoc.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\resource_bundle_handler_cpptoc.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\resource_handler_cpptoc.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\post_data_element_ctocpp.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\process_message_ctocpp.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\quota_callback_ctocpp.h" />
+    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\request_context_ctocpp.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\request_ctocpp.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\response_ctocpp.h" />
     <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\scheme_registrar_ctocpp.h" />
@@ -194,6 +196,7 @@
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\read_handler_cpptoc.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\render_handler_cpptoc.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\render_process_handler_cpptoc.cc" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\request_context_handler_cpptoc.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\request_handler_cpptoc.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\resource_bundle_handler_cpptoc.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\cpptoc\resource_handler_cpptoc.cc" />
@@ -235,6 +238,7 @@
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\post_data_element_ctocpp.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\process_message_ctocpp.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\quota_callback_ctocpp.cc" />
+    <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\request_context_ctocpp.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\request_ctocpp.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\response_ctocpp.cc" />
     <ClCompile Include="..\..\..\addons\ofxCEFClient\cef\libcef_dll\ctocpp\scheme_registrar_ctocpp.cc" />
@@ -407,7 +411,7 @@
       <AdditionalIncludeDirectories>..\..\..\third_party\wtl\include;C:\Program Files (x86)\Windows Kits\8.0\Include\shared;C:\Program Files (x86)\Windows Kits\8.0\Include\um;C:\Program Files (x86)\Windows Kits\8.0\Include\winrt;$(VSInstallDir)\VC\atlmfc\include;..\..\..\addons\ofxCEFClient\cef\;..\..\..\addons\ofxCEFClient\cef\libcef_dll;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/MP /we4389 /Oy- %(AdditionalOptions)</AdditionalOptions>
       <BufferSecurityCheck>true</BufferSecurityCheck>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>None</DebugInformationFormat>
       <DisableSpecificWarnings>4351;4355;4396;4503;4819;4100;4121;4125;4127;4130;4131;4189;4201;4238;4244;4245;4310;4428;4481;4505;4510;4512;4530;4610;4611;4701;4702;4706;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ExceptionHandling>false</ExceptionHandling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
