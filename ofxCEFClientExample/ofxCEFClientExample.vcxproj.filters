@@ -42,15 +42,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CEF">
-      <UniqueIdentifier>{75bd2b5c-9da5-4bc9-9fde-433b3f1a8836}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CEF\Internal">
-      <UniqueIdentifier>{9e7932fa-c79b-4d52-beba-12ff7a540383}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CEF\Wrapper">
-      <UniqueIdentifier>{6cc61ca3-1b76-460a-bfb7-2c9acd269b93}</UniqueIdentifier>
-    </Filter>
     <Filter Include="addons">
       <UniqueIdentifier>{386268a5-8fc1-452c-8cd1-ddc18182996c}</UniqueIdentifier>
     </Filter>
@@ -59,6 +50,18 @@
     </Filter>
     <Filter Include="addons\ofxCEFClient\Client">
       <UniqueIdentifier>{5d8505a2-8e44-49aa-b27f-94a2e866e2e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEF">
+      <UniqueIdentifier>{cb545050-b9d5-4712-acfe-4900a8577372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEF\internal">
+      <UniqueIdentifier>{192ce50f-7b49-4781-be45-ed48b5acc8fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEF\capi">
+      <UniqueIdentifier>{9d724d94-8fb9-420e-b5c5-7e65033f26cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEF\wrapper">
+      <UniqueIdentifier>{bc0b9261-445b-46c7-9e64-eef19aa0e0d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,224 +92,209 @@
     <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\string_util.h">
       <Filter>addons\ofxCEFClient\Client</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_zip_reader.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_app.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_base.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_browser.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_browser_process_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_callback.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_client.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_command_line.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_context_menu_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_cookie.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_dialog_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_display_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_dom.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_download_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_download_item.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_drag_data.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_drag_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_focus_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_frame.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_geolocation.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_geolocation_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_jsdialog_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_keyboard_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_life_span_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_load_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_menu_model.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_origin_whitelist.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_pack_resources.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_pack_strings.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_path_util.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_process_message.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_process_util.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_render_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_render_process_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_request.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_request_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_resource_bundle_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_resource_handler.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_response.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_runnable.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_scheme.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_stream.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_string_visitor.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_task.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_trace.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_trace_event.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_url.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_urlrequest.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_v8.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_values.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_version.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_web_plugin.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\cef_xml_reader.h">
-      <Filter>CEF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_byte_read_handler.h">
-      <Filter>CEF\Wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_stream_resource_handler.h">
-      <Filter>CEF\Wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_xml_object.h">
-      <Filter>CEF\Wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\wrapper\cef_zip_archive.h">
-      <Filter>CEF\Wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_types.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_wrappers.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_time.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_tuple.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_types.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_types_win.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_types_wrappers.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_win.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_build.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_export.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_ptr.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_list.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_map.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxCEFClient\cef\include\internal\cef_string_multimap.h">
-      <Filter>CEF\Internal</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxCEFClient\src\client\util.h">
       <Filter>addons\ofxCEFClient\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_build.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_export.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_ptr.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_string.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_string_list.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_string_map.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_string_multimap.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_string_types.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_string_wrappers.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_time.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_tuple.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_types.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_types_win.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_types_wrappers.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\internal\cef_win.h">
+      <Filter>CEF\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_app_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_base_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_browser_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_browser_process_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_callback_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_client_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_command_line_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_context_menu_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_cookie_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_dialog_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_display_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_dom_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_download_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_download_item_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_drag_data_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_drag_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_focus_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_frame_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_geolocation_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_geolocation_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_jsdialog_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_keyboard_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_life_span_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_load_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_menu_model_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_origin_whitelist_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_path_util_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_process_message_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_process_util_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_render_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_render_process_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_request_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_request_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_resource_bundle_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_resource_handler_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_response_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_scheme_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_stream_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_string_visitor_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_task_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_trace_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_urlrequest_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_url_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_v8_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_values_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_web_plugin_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_xml_reader_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\capi\cef_zip_reader_capi.h">
+      <Filter>CEF\capi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\wrapper\cef_byte_read_handler.h">
+      <Filter>CEF\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\wrapper\cef_stream_resource_handler.h">
+      <Filter>CEF\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\wrapper\cef_xml_object.h">
+      <Filter>CEF\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cef\include\wrapper\cef_zip_archive.h">
+      <Filter>CEF\wrapper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

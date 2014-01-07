@@ -63,11 +63,11 @@ void ofxCEFClient::loop() {
 	} 
 
 	if (!_initialized) {
-		ofLogNotice() << "CEF Client Not Initialized \n";
+		ofLogError() << "CEF Client Not Initialized \n";
 		return; 
 	}
 	
-	//  It's really not ideal to set these pointers constantly... 
+	//  TOFIX: It's really not ideal to set these pointers constantly... 
 	if (loadingTex) {
 
 		loadingTex = false; 
@@ -80,11 +80,11 @@ void ofxCEFClient::loop() {
 
 	}
 
-	// on the main thread..
+	// On the main thread...
 	testApp* myApp = (testApp*)ofGetAppPtr();
 	while(_eventList.size() > 0) {
-		myApp->cefMessageCallback(_eventList.back()); // Get the last
-		_eventList.pop_back(); // Pop it off 
+		myApp->cefMessageCallback(_eventList.back());	// Get the last
+		_eventList.pop_back();							// Pop it off 
 	}
 
 }
@@ -204,7 +204,7 @@ void ofxCEFClient::_keyReleased(ofKeyEventArgs &e) {
 
 void ofxCEFClient::_windowResized(ofResizeEventArgs &e) {
 
-	// BUGBUG: Should trigger a render to the browse
+	// BUGBUG: Should trigger a render to the browser
 	// _cef_buffer.clear();
 	// _cef_buffer.allocate(e.width, e.height, GL_RGBA); 
 	//_browserHost->WasResized();
@@ -212,9 +212,12 @@ void ofxCEFClient::_windowResized(ofResizeEventArgs &e) {
 }
 
 void ofxCEFClient::_exit(ofEventArgs &e) {
-	
+
 	myClientHandler->CloseAllBrowsers(true);
-	CefShutdown();
+
+	// Most clean to use CefShutdown(), but seems to throw some nasty hard-to-debug error for the time being. 
+	// I mean, we're closing the application anyway... 
+	// CefShutdown();
 
 }
 
