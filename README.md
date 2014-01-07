@@ -37,7 +37,7 @@ myCEFClient.sendMessage("a_new_message", myNewMessage);
 
 ## Events in JS
 
-CEF exposes a global JS object with several methods called `app`. App is created by CEF and injected into the user's JS.
+CEF exposes a global JS object with several methods called `app`. `app` is created by CEF and injected into the user's JS.
 
 ```javascript
 // Register a callback a single message from openFrameworks
@@ -61,9 +61,16 @@ The example project comes with an HTML5-Boilerlate based template.
 ## Project Setup
 The example project needs to be placed in $(OFX_ROOT)/apps/myApps
 
-Right now, the best place to start is by modifying this example. 
+Right now, the best place to start is by modifying the included example. If setting up from scratch, make sure you do the following:
+* Add libcef_dll_wrapper.vcxproj to your existing Visaul Studio solution
+* In Visual Studio, copy the CEF folder from libcef_dll_wrapper to your own project
+* Link against libcef.lib
+* Make sure the addon files and all sub-folders in src/ and cef/include are in your include path
+* Add the files from src/ and src/client into your project so they get compiled
+* Ensure libcef_dll_wrapper is a dependency of your own project (Project Name >> Project Dependencies)
+* Ensure libcef_dll_wrapper is referenced by your project (Project Name >> References >> Add New Reference) 
 
-Github disallows files over 100mb in size. The project requires libcef.dll (about 203mb), so this dependency is included as a zipped file, which brings it down to about 30mb. Just unzip libcef.zip in the ofxCEFClientExample\bin directory. 
+libcef.lib is configured for release, using a 39mb DLL at runtime. 
 
 ## HTML/JS in C++?
 [Awesomium](http://www.awesomium.com/) is another implementation of this idea (ofxAwesomium), and while free for apps making under 100k in revenue, isn't OSS. librocket is another variation but approaches it differently, instead using a custom HTML/CSS parser to draw interface elements.
@@ -72,7 +79,7 @@ Github disallows files over 100mb in size. The project requires libcef.dll (abou
 Applications using CEF normally link with the /MT setting. Since openFrameworks is all /MD, this app statically links the libcef_dll_wrapper which dynamically loads the /MT version.
 
 ## Known Bugs
-* Resizing the ofx window (sometimes) crashes.
+* Resizing a window isn't currently supported. 
 * Text fields in HTML don't like particular keys other than standard characters
 * Text fields in HTML don't have a blinking cursor when focused
 * App doesn't shut down cleanly
