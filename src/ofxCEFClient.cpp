@@ -80,12 +80,10 @@ void ofxCEFClient::loop() {
 
 	}
 
-	// On the main thread...
 	testApp* myApp = (testApp*)ofGetAppPtr();
-	while(_eventList.size() > 0) {
-		myApp->cefMessageCallback(_eventList.back());	// Get the last
-		_eventList.pop_back();							// Pop it off 
-	}
+	CefRefPtr<CefProcessMessage> newMsg; 
+	if (jsEventQueue.fetch(newMsg)) 
+		myApp->cefMessageCallback(newMsg);
 
 }
 
@@ -233,6 +231,6 @@ void ofxCEFClient::sendMessage(std::string name, CefRefPtr <CefListValue> messag
 
 void ofxCEFClient::messageCallback(CefRefPtr<CefProcessMessage> message) {
 
-	_eventList.push_back(message->Copy()); 
+	jsEventQueue.post(message); 
 
 }

@@ -4,6 +4,38 @@
 
 #include "ofMain.h"
 #include "client.h"
+#include <thread>
+#include <mutex>
+
+class message_queue {
+
+	public: 
+
+	std::deque < CefRefPtr<CefProcessMessage> > fifo;
+	std::mutex guard;            
+
+	void post (const CefRefPtr<CefProcessMessage> &msg) {
+		std::lock_guard<std::mutex> lock(guard);
+		fifo.push_back(msg->Copy());
+	}
+
+	bool fetch (CefRefPtr<CefProcessMessage> &message) {
+
+		bool hasMessage = false; 
+
+		std::lock_guard<std::mutex> lock(guard);
+
+		if (fifo.size()) {
+			message = fifo.front();
+			fifo.pop_front();
+			hasMessage = true; 
+		}
+
+		return hasMessage;
+
+	}
+
+};
 
 class ofxCEFClient {
 
@@ -49,7 +81,7 @@ private:
 
 	bool _initialized; 
 
-	vector< CefRefPtr<CefProcessMessage> > _eventList;
+	message_queue jsEventQueue; 
 
 	unsigned char *buffer; 
 	int width;

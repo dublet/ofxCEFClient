@@ -120,7 +120,7 @@ bool ClientHandler::OnProcessMessageReceived(
     CefRefPtr<CefProcessMessage> message)
 {
 
-		ofLogNotice() << (__FUNCTION__) << std::endl;
+	ofLogNotice() << (__FUNCTION__) << std::endl;
 
 	// Check for messages from the client renderer.
 	std::string message_name = message->GetName();
