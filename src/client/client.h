@@ -8,10 +8,12 @@
 // This makes poco not undefine anything... 
 #define POCO_NO_UNWINDOWS
 
-#include <string>
+#include "ofMain.h"
+
 #include "include/cef_base.h"
 #include "client_app.h"
-#include "ofMain.h"
+
+#include <string>
 #include <strsafe.h>
 #include <WinBase.h>
 

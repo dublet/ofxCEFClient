@@ -5,6 +5,8 @@
 #define CEF_TESTS_CEFCLIENT_CLIENT_HANDLER_H_
 #pragma once
 
+#include "ofxCEFClient.h"
+
 #include <list>
 #include <map>
 #include <set>
@@ -12,7 +14,6 @@
 
 #include "util.h"
 #include "include/cef_client.h"
-#include "ofxCEFClient.h"
 
 // ClientHandler implementation.
 class ClientHandler : public CefClient,

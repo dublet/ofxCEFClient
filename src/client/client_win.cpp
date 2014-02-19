@@ -1,16 +1,18 @@
 // Copyright (c) 2013 The Chromium Embedded Framework 
 // Copyright (c) 2013 Intel Corporation
 
+#include "ofMain.h"
+#include "ofxCEFClient.h"
+
+#include "WinBase.h"
 #include "client.h"
+
 #include <windows.h>
 #include <commdlg.h>
 #include <shellapi.h>
 #include <direct.h>
 #include <sstream>
 #include <string>
-#include "WinBase.h"
-#include "ofMain.h"
-#include "ofxCEFClient.h"
 
 #include "include/cef_app.h"
 #include "include/cef_browser.h"

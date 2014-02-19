@@ -1,6 +1,7 @@
 // Copyright (c) 2013 Intel Corporation
 
 #include "client.h"
+
 #include <stdio.h>
 #include <cstdlib>
 #include <sstream>

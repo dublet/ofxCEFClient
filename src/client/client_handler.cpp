@@ -1,8 +1,9 @@
 // Copyright (c) 2011 The Chromium Embedded Framework 
 // Copyright (c) 2013 Intel Corporation
 
-#include "client_handler.h"
 #include "ofMain.h"
+
+#include "client_handler.h"
 
 #include <string>
 #include <windows.h>
@@ -731,12 +732,6 @@ void ClientHandler::CreateProcessMessageDelegates(ProcessMessageDelegateSet &del
 
 	client_binding_manager::CreateProcessMessageDelegates(delegates);
 
-	// Create the dialog test delegates.
-	// dialog_test::CreateProcessMessageDelegates(delegates);
-
-	// Create the window test delegates.
-	//window_test::CreateProcessMessageDelegates(delegates);
-
 }
 
 // ============================================= WINDOWS SPECIFIC
@@ -767,31 +762,11 @@ void ClientHandler::OnTitleChange(CefRefPtr<CefBrowser> browser,
 
 void ClientHandler::SendNotification(NotificationType type)
 {
-
-	/*
-	UINT id;
-	switch (type)
-	{
-	    case NOTIFY_CONSOLE_MESSAGE:
-	        id = ID_WARN_CONSOLEMESSAGE;
-	        break;
-	    case NOTIFY_DOWNLOAD_COMPLETE:
-	        id = ID_WARN_DOWNLOADCOMPLETE;
-	        break;
-	    case NOTIFY_DOWNLOAD_ERROR:
-	        id = ID_WARN_DOWNLOADERROR;
-	        break;
-	    default:
-	        return;
-	}
-	*/
-	// PostMessage(m_MainHwnd, WM_COMMAND, id, 0);
 	
 }
 
 void ClientHandler::SetLoading(bool isLoading)
 {
-
 
 }
 

@@ -1,14 +1,16 @@
 // Copyright (c) 2011 The Chromium Embedded Framework 
 // Copyright (c) 2013 Intel Corporation
 
-#include "client_app.h"
+#include "ofMain.h"
+
 #include <string>
+
+#include "client_app.h"
 #include "include/cef_cookie.h"
 #include "include/cef_process_message.h"
 #include "include/cef_task.h"
 #include "include/cef_v8.h"
 #include "util.h"  // NOLINT(build/include)
-#include "ofMain.h"
 
 // BEGIN Anonymous Namespace
 namespace {

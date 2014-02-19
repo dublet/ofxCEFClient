@@ -35,15 +35,14 @@ void ofxCEFClient::enableEvents() {
 
 }
 
-
-
+// startupResource is presently not used, rather hard coded to an index.html below. 
 void ofxCEFClient::init(std::string startupResource) {
 
 	ofFilePath pathUtil; 
 
 	string startResource = "file:\\\\" + pathUtil.getCurrentWorkingDirectory() + "interface\\index.html"; 
 
-	ofLogNotice() << "Using Interface Index HTML: \n " << startResource << std::endl; 
+	ofLogNotice() << "Using UI HTML Document: \n " << startResource << std::endl; 
 
 	ClientAppInit(this, startResource); 
 

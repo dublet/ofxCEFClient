@@ -1,18 +1,15 @@
 // Copyright (c) 2013 Intel Corporation
 
+#include "ofMain.h"
+
 #include "client_binding_manager.h"
 
 #include <algorithm>
 #include <string>
 
-#include "ofMain.h"
+namespace client_binding_manager {
 
-namespace client_binding_manager
-{
-
-	namespace
-
-	{
+	namespace {
 
 		const char *kMessageName = "client_binding_manager";
 
@@ -40,12 +37,10 @@ namespace client_binding_manager
 
 		};
 
-	}  // namespace
+	}  // anonymous namespace
 
 	void CreateProcessMessageDelegates( ClientHandler::ProcessMessageDelegateSet &delegates) {
-
 		delegates.insert(new ProcessMessageDelegate);
-
 	}
 
-}
+} // client_binding_manager namespace

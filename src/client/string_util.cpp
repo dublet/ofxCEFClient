@@ -2,9 +2,10 @@
 // Copyright (c) 2013 Intel Corporation
 
 #include "string_util.h"
+#include "include/cef_request.h"
+
 #include <sstream>
 #include <string>
-#include "include/cef_request.h"
 
 void DumpRequestContents(CefRefPtr<CefRequest> request, std::string& str) {
   std::stringstream ss;
