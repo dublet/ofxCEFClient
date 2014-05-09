@@ -596,12 +596,15 @@ void ClientHandler::OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect &re
 
 void ClientHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
-
+	if (dirtyRects.size() == 1 && dirtyRects[0].width == mRectangle.width && dirtyRects[0].height == mRectangle.height) {
+		int i = 0;
+	}
 	this->buffer = const_cast<void*>(buffer);
 	if (width != mRectangle.width || height != mRectangle.height) {
 		ofLogNotice("ClientHandler", "Width and height mismatch between rectangle and draw region");
 	}
 
+	if (((const unsigned char *)buffer)[3] == 0xff) 
 	// Nerp -- fix this 
 	ofxClient->loadedTexture(); 
 

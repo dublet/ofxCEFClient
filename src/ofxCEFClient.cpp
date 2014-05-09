@@ -100,17 +100,17 @@ void ofxCEFClient::loop() {
 }
 
 void ofxCEFClient::loadedTexture() {
-	mLoadedTexture = true; 
-	
-	 _buffer.setFromPixels( (unsigned char *)myClientHandler.get()->buffer, width, height, 4);
+	 _buffer.setFromPixels((unsigned char *)myClientHandler.get()->buffer, width, height, 4);
+	 mLoadedTexture = true; 
 }
 
 
-void ofxCEFClient::loadTex(ofTexture * texture) {
+void ofxCEFClient::loadTex(ofTexture * texture, ofPixels &pixels) {
 	while (!mLoadedTexture)
-		Sleep(10);
+		Sleep(1);
 
-	texture->loadData(_buffer); 
+	pixels.swap(_buffer);
+	texture->loadData(pixels); 
 	myClientHandler.get()->buffer = NULL;
 }
 

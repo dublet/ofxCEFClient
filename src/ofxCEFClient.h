@@ -57,7 +57,7 @@ public:
 
 	void messageCallback(CefRefPtr<CefProcessMessage> message); 
 	
-	void loadTex(ofTexture *); 
+	void loadTex(ofTexture *, ofPixels &); 
 
 	void loadedTexture();
 	
