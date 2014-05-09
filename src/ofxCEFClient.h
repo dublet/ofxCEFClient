@@ -6,6 +6,7 @@
 #include "client.h"
 #include <thread>
 #include <mutex>
+#include <atomic>
 
 class message_queue {
 
@@ -44,8 +45,9 @@ public:
 	ofxCEFClient();
 
 	~ofxCEFClient();
+	
+	void init(std::string startupResource, CefRefPtr<CefDOMVisitor> , int width = -1, int height = -1);
 
-	void init(std::string startupResource);
 
 	void loop(); 
 
@@ -54,13 +56,14 @@ public:
 	void sendMessage(std::string name, CefRefPtr<CefListValue> message); 
 
 	void messageCallback(CefRefPtr<CefProcessMessage> message); 
+	
+	void loadTex(ofTexture *); 
 
-	void loadTex(unsigned char *buffer); 
-
-	bool loadingTex; 
+	void loadedTexture();
+	
 
 private:
-
+	
 	void enableEvents(); 
 
 	void _mouseMoved(ofMouseEventArgs &e);
@@ -78,6 +81,7 @@ private:
 	CefRefPtr<CefBrowserHost> _browserHost; 
 
 	ofTexture _cef_buffer; 
+	ofPixels _buffer;
 
 	bool _initialized; 
 
@@ -88,5 +92,6 @@ private:
 	int height; 
 
 	uint32_t lastClick; 
-
+	std::atomic<bool> mLoadedTexture; 
+	
 };

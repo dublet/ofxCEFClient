@@ -2,16 +2,18 @@
 
 #include "ofxCEFClient.h"
 #include "client_handler.h"
-#include "testApp.h"
+//#include "testApp.h"
+#include <windows.h>
 
 // The global ClientHandler reference (defined in client.cpp)
 extern CefRefPtr<ClientHandler> myClientHandler;
 
 ofxCEFClient::ofxCEFClient() {
-	
-	_cef_buffer.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, false); 
+	_cef_buffer.clear();
 
 	_initialized = false; 
+
+	mLoadedTexture = false;
 
 }
 
@@ -36,16 +38,27 @@ void ofxCEFClient::enableEvents() {
 }
 
 // startupResource is presently not used, rather hard coded to an index.html below. 
-void ofxCEFClient::init(std::string startupResource) {
+void ofxCEFClient::init(std::string startupResource, CefRefPtr<CefDOMVisitor> domVisitor, int width, int height) {
+	if (width == -1)
+		width = ofGetWidth();
+	if (height == -1)
+		height = ofGetHeight();
+
+	this->width = width;
+	this->height = height;
+	_cef_buffer.clear();
+	_cef_buffer.allocate(width, height, GL_RGBA, false); 
 
 	ofFilePath pathUtil; 
 
-	string startResource = "file:\\\\" + pathUtil.getCurrentWorkingDirectory() + "interface\\index.html"; 
+	//string startResource = "file:\\\\" + pathUtil.getCurrentWorkingDirectory() + "interface\\index.html"; 
+	if (startupResource.empty() || startupResource == "") {
+		startupResource = ofFilePath::getAbsolutePath("tile-small.html", true);
+	}
+	startupResource = "file:\\\\" + startupResource;
+	ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
 
-	ofLogNotice() << "Using UI HTML Document: \n " << startResource << std::endl; 
-
-	ClientAppInit(this, startResource); 
-
+	ClientAppInit(this, startupResource, domVisitor, width, height); 
 }
 
 void ofxCEFClient::loop() {
@@ -67,33 +80,44 @@ void ofxCEFClient::loop() {
 	}
 	
 	//  TOFIX: It's really not ideal to set these pointers constantly... 
-	if (loadingTex) {
+	if (mLoadedTexture) {
 
-		loadingTex = false; 
+		mLoadedTexture = false; 
 		
 		buffer = (unsigned char *) myClientHandler.get()->buffer; 
-		width = myClientHandler.get()->width; 
-		height = myClientHandler.get()->height; 
+		//width = myClientHandler.get()->width; 
+		//height = myClientHandler.get()->height; 
 
 		_cef_buffer.loadData(buffer, width, height, GL_BGRA);
 
 	}
-
+#if 0
 	testApp* myApp = (testApp*)ofGetAppPtr();
 	CefRefPtr<CefProcessMessage> newMsg; 
 	if (jsEventQueue.fetch(newMsg)) 
 		myApp->cefMessageCallback(newMsg);
-
+#endif
 }
 
-void ofxCEFClient::loadTex(unsigned char *buffer) {
-	loadingTex = true; 
+void ofxCEFClient::loadedTexture() {
+	mLoadedTexture = true; 
+	
+	 _buffer.setFromPixels( (unsigned char *)myClientHandler.get()->buffer, width, height, 4);
+}
+
+
+void ofxCEFClient::loadTex(ofTexture * texture) {
+	while (!mLoadedTexture)
+		Sleep(10);
+
+	texture->loadData(_buffer); 
+	myClientHandler.get()->buffer = NULL;
 }
 
 
 void ofxCEFClient::paint() {
 
-	_cef_buffer.draw(0, 0, ofGetWidth(), ofGetHeight()); 
+	_cef_buffer.draw(0, 0, width, height); 
 
 }
 

@@ -83,7 +83,7 @@ int ClientHandler::m_BrowserCount = 0;
 ClientHandler::ClientHandler()
 	: m_BrowserId(0),
 	  m_bIsClosing(false),
-	  m_bFocusOnEditableField(false)
+	  m_bFocusOnEditableField(false),  buffer(0)
 {
 
 	ofLogNotice() << (__FUNCTION__) << std::endl;
@@ -133,7 +133,7 @@ bool ClientHandler::OnProcessMessageReceived(
 		m_bFocusOnEditableField = message->GetArgumentList()->GetBool(0);
 		return true;
 	}
-
+	 
 	bool handled = false;
 
 	// Execute delegate callbacks.
@@ -521,31 +521,39 @@ void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser,
 
 }
 
-bool ClientHandler::GetRootScreenRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
-{
-
-	RECT window_rect = {0};
-
-	if (::GetWindowRect(ofxWindowHandle, &window_rect)) {
-		rect = CefRect(window_rect.left, window_rect.top, window_rect.right - window_rect.left, window_rect.bottom - window_rect.top);
-		return true;
-	}
+ bool ClientHandler::OnBeforeBrowse(CefRefPtr<CefBrowser> browser,
+									CefRefPtr<CefFrame> frame,
+									CefRefPtr<CefRequest> request,
+									bool is_redirect)
+ {
+	if(mDomVisitor)
+		frame->VisitDOM(mDomVisitor);
 
 	return false;
+}
 
+
+
+void ClientHandler::setDomVisitor(CefRefPtr<CefDOMVisitor> domVisitor) {
+	mDomVisitor = domVisitor;
+}
+
+void ClientHandler::setRect(ofRectangle rect) {
+	mRectangle = rect;
+}
+
+bool ClientHandler::GetRootScreenRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
+{
+	rect = CefRect(0, 0, mRectangle.width, mRectangle.height);
+	return true;
 }
 
 bool ClientHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
-
 	RECT clientRect;
-
-	if (!::GetClientRect(ofxWindowHandle, &clientRect))
-		return false;
-
 	rect.x = rect.y = 0;
-	rect.width = clientRect.right;
-	rect.height = clientRect.bottom;
+	rect.width = mRectangle.width;
+	rect.height = mRectangle.height;
 
 	return true;
 
@@ -590,11 +598,12 @@ void ClientHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type
 {
 
 	this->buffer = const_cast<void*>(buffer);
-	this->width = width;
-	this->height = height; 
+	if (width != mRectangle.width || height != mRectangle.height) {
+		ofLogNotice("ClientHandler", "Width and height mismatch between rectangle and draw region");
+	}
 
 	// Nerp -- fix this 
-	ofxClient->loadTex(NULL); 
+	ofxClient->loadedTexture(); 
 
 }
 

@@ -214,6 +214,21 @@ class ClientHandler : public CefClient,
 		virtual void OnProtocolExecution(CefRefPtr<CefBrowser> browser,
 		                                 const CefString &url,
 		                                 bool &allow_os_execution) OVERRIDE;
+		///
+		// Called on the UI thread before browser navigation. Return true to cancel
+		// the navigation or false to allow the navigation to proceed. The |request|
+		// object cannot be modified in this callback.
+		// CefLoadHandler::OnLoadingStateChange will be called twice in all cases.
+		// If the navigation is allowed CefLoadHandler::OnLoadStart and
+		// CefLoadHandler::OnLoadEnd will be called. If the navigation is canceled
+		// CefLoadHandler::OnLoadError will be called with an |errorCode| value of
+		// ERR_ABORTED.
+		///
+		/*--cef()--*/
+		virtual bool OnBeforeBrowse(CefRefPtr<CefBrowser> browser,
+									CefRefPtr<CefFrame> frame,
+									CefRefPtr<CefRequest> request,
+									bool is_redirect) OVERRIDE ;
 
 		// CefRenderHandler methods
 		virtual bool GetRootScreenRect(CefRefPtr<CefBrowser> browser,
@@ -246,9 +261,6 @@ class ClientHandler : public CefClient,
 		}
 
 		void *buffer; 
-		int width;
-		int height; 
-
 		ofxCEFClient *ofxClient; 
 
 		virtual void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor) OVERRIDE;
@@ -306,6 +318,8 @@ class ClientHandler : public CefClient,
 
 		bool hasBrowser(); 
 
+		void setDomVisitor(CefRefPtr<CefDOMVisitor> domVisitor);
+		void setRect(ofRectangle );
 	protected:
 
 		void SetLoading(bool isLoading);
@@ -361,6 +375,9 @@ class ClientHandler : public CefClient,
 		// Number of currently existing browser windows. The application will exit
 		// when the number of windows reaches 0.
 		static int m_BrowserCount;
+
+		CefRefPtr<CefDOMVisitor> mDomVisitor;
+		ofRectangle mRectangle;
 
 		// Include the default reference counting implementation.
 		IMPLEMENT_REFCOUNTING(ClientHandler);

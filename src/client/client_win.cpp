@@ -55,8 +55,8 @@ class MainBrowserProvider {
 
 // http://stackoverflow.com/questions/15462064/hinstance-in-createwindow
 
-void ClientAppInit(ofxCEFClient *ofx, std::string startResource) {
-
+void ClientAppInit(ofxCEFClient *ofx, std::string startResource, CefRefPtr<CefDOMVisitor> domVisitor, int width, int height) {
+	
 	// Init =======================================================
 
 	HINSTANCE hInstance = GetModuleHandle(nullptr); 
@@ -89,11 +89,12 @@ void ClientAppInit(ofxCEFClient *ofx, std::string startResource) {
 	HWND hWnd = WindowFromDC(wglGetCurrentDC());
 	myClientHandler = new ClientHandler();
 	myClientHandler->SetOfxPtr(ofx); 
-
-	RECT rect;
-	GetClientRect(hWnd, &rect);
+	myClientHandler->setDomVisitor(domVisitor);
+	myClientHandler->setRect(ofRectangle(0, 0, width, height));
 
 	CefWindowInfo info;
+	info.width = width;
+	info.height = height;
 	info.SetAsOffScreen(hWnd);
 	info.SetTransparentPainting(true);
 	//info.SetAsChild(hWnd, rect); 
