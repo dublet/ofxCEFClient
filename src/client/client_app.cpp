@@ -6,11 +6,14 @@
 #include <string>
 
 #include "client_app.h"
+#include "client_handler.h"
 #include "include/cef_cookie.h"
 #include "include/cef_process_message.h"
 #include "include/cef_task.h"
 #include "include/cef_v8.h"
 #include "util.h"  // NOLINT(build/include)
+
+
 
 // BEGIN Anonymous Namespace
 namespace {
@@ -161,6 +164,11 @@ namespace {
 						retval = CefV8Value::CreateBool(removed);
 						handled = true;
 					}
+				} else if (name == "onLoad") {
+					std::string &javascript = client_app_->getCurrentClientHandler()->ofxClient->getJavascript();
+					auto frame  = CefV8Context::GetCurrentContext()->GetBrowser()->GetMainFrame();
+					frame->ExecuteJavaScript(javascript.c_str(), frame->GetURL(), 0);
+					handled = true;
 				}
 
 				if (!handled)
@@ -177,10 +185,8 @@ namespace {
 
 }  // END Anonymous Namespace
 
-ClientApp::ClientApp() 
+ClientApp::ClientApp()
 {
-
-
 	ofLogNotice() << (__FUNCTION__) << std::endl;
 
 
@@ -285,7 +291,22 @@ void ClientApp::OnWebKitInitialized() {
 	    "  };"
 	    "})();";
 
+	std::string tileFuncs =
+    "var tileFuncs;"
+    "if (!tileFuncs)"
+    "  tileFuncs = {};"
+    "(function() {"
+    "  tileFuncs.onLoad = function() {"
+    "    native function onLoad();"
+    "    return onLoad();"
+    "  };"
+    "})();";
+
+
 	CefRegisterExtension("v8/app", app_code,
+	                     new ClientAppExtensionHandler(this));
+	
+	CefRegisterExtension("v8/app", tileFuncs,
 	                     new ClientAppExtensionHandler(this));
 
 	RenderDelegateSet::iterator it = render_delegates_.begin();

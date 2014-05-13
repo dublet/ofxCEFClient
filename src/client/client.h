@@ -22,7 +22,10 @@ class CefBrowser;
 class CefCommandLine;
 class ofxCEFClient; 
 
-void ClientAppInit(ofxCEFClient *ofx, std::string startResource, CefRefPtr<CefDOMVisitor>, int width, int height);
+void ClientAppInit(ofxCEFClient *ofx);
+
+CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFClient *ofx, std::string startResource);
+
 
 // Returns the main browser window instance.
 CefRefPtr<CefBrowser> AppGetBrowser();

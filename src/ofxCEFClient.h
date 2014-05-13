@@ -8,6 +8,8 @@
 #include <mutex>
 #include <atomic>
 
+#include "client\client.h"
+
 class message_queue {
 
 	public: 
@@ -46,8 +48,9 @@ public:
 
 	~ofxCEFClient();
 	
-	void init(std::string startupResource, CefRefPtr<CefDOMVisitor> , int width = -1, int height = -1);
+	void init();
 
+	void createBrowser(std::string startupResource, int width = -1, int height = -1, string js = "");
 
 	void loop(); 
 
@@ -56,11 +59,16 @@ public:
 	void sendMessage(std::string name, CefRefPtr<CefListValue> message); 
 
 	void messageCallback(CefRefPtr<CefProcessMessage> message); 
+
 	
 	void loadTex(ofTexture *, ofPixels &); 
 
 	void loadedTexture();
+
+	int getWidth() { return width; }
+	int getHeight() { return height; }
 	
+	std::string &getJavascript() { return mJavascript; }
 
 private:
 	
@@ -93,5 +101,8 @@ private:
 
 	uint32_t lastClick; 
 	std::atomic<bool> mLoadedTexture; 
+	CefRefPtr<CefBrowser> mBrowser;
+
+	string mJavascript;
 	
 };

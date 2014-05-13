@@ -8,6 +8,8 @@
 
 #include "include/cef_app.h"
 
+class ClientHandler;
+
 class ClientApp : public CefApp,
 			    public CefBrowserProcessHandler,
 			    public CefRenderProcessHandler {
@@ -146,6 +148,10 @@ public:
 	bool RemoveMessageCallback(const std::string& message_name,
 		int browser_id);
 
+	
+	ClientHandler * getCurrentClientHandler() { return current_client_handler_; }
+	void setCurrentClientHandler(ClientHandler *myClientHandler) { current_client_handler_ = myClientHandler; }
+
 private:
 	
 	// Creates all of the BrowserDelegate objects. Implemented in
@@ -237,6 +243,7 @@ private:
 
 	// Schemes that will be registered with the global cookie manager.
 	std::vector<CefString> cookieable_schemes_;
+	ClientHandler *current_client_handler_;
 
 	IMPLEMENT_REFCOUNTING(ClientApp);
 

@@ -418,6 +418,7 @@ void ClientHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser,
 		SetLoading(false);
 	}
 
+	
 }
 
 void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser,
@@ -526,25 +527,13 @@ void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser,
 									CefRefPtr<CefRequest> request,
 									bool is_redirect)
  {
-	if(mDomVisitor)
-		frame->VisitDOM(mDomVisitor);
 
 	return false;
 }
 
-
-
-void ClientHandler::setDomVisitor(CefRefPtr<CefDOMVisitor> domVisitor) {
-	mDomVisitor = domVisitor;
-}
-
-void ClientHandler::setRect(ofRectangle rect) {
-	mRectangle = rect;
-}
-
 bool ClientHandler::GetRootScreenRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
-	rect = CefRect(0, 0, mRectangle.width, mRectangle.height);
+	rect = CefRect(0, 0, ofxClient->getWidth(), ofxClient->getHeight());
 	return true;
 }
 
@@ -552,11 +541,9 @@ bool ClientHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
 	RECT clientRect;
 	rect.x = rect.y = 0;
-	rect.width = mRectangle.width;
-	rect.height = mRectangle.height;
-
+	rect.width = ofxClient->getWidth();
+	rect.height = ofxClient->getHeight();
 	return true;
-
 }
 
 bool ClientHandler::GetScreenPoint(CefRefPtr<CefBrowser> browser,
@@ -596,11 +583,8 @@ void ClientHandler::OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect &re
 
 void ClientHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
-	if (dirtyRects.size() == 1 && dirtyRects[0].width == mRectangle.width && dirtyRects[0].height == mRectangle.height) {
-		int i = 0;
-	}
 	this->buffer = const_cast<void*>(buffer);
-	if (width != mRectangle.width || height != mRectangle.height) {
+	if (width != ofxClient->getWidth() || height != ofxClient->getHeight()) {
 		ofLogNotice("ClientHandler", "Width and height mismatch between rectangle and draw region");
 	}
 

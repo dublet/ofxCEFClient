@@ -318,8 +318,6 @@ class ClientHandler : public CefClient,
 
 		bool hasBrowser(); 
 
-		void setDomVisitor(CefRefPtr<CefDOMVisitor> domVisitor);
-		void setRect(ofRectangle );
 	protected:
 
 		void SetLoading(bool isLoading);
@@ -375,9 +373,6 @@ class ClientHandler : public CefClient,
 		// Number of currently existing browser windows. The application will exit
 		// when the number of windows reaches 0.
 		static int m_BrowserCount;
-
-		CefRefPtr<CefDOMVisitor> mDomVisitor;
-		ofRectangle mRectangle;
 
 		// Include the default reference counting implementation.
 		IMPLEMENT_REFCOUNTING(ClientHandler);

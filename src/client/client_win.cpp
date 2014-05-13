@@ -53,9 +53,10 @@ class MainBrowserProvider {
 } g_main_browser_provider;
 
 
+static CefRefPtr<ClientApp> sClientApp;
 // http://stackoverflow.com/questions/15462064/hinstance-in-createwindow
 
-void ClientAppInit(ofxCEFClient *ofx, std::string startResource, CefRefPtr<CefDOMVisitor> domVisitor, int width, int height) {
+void ClientAppInit(ofxCEFClient *ofx) {
 	
 	// Init =======================================================
 
@@ -66,7 +67,7 @@ void ClientAppInit(ofxCEFClient *ofx, std::string startResource, CefRefPtr<CefDO
 
 	// Create the v8-binding app so we can communicate
 	// between html/js, the cef client, and ofx
-	CefRefPtr<ClientApp> app(new ClientApp);
+	sClientApp = new ClientApp();
 
 	// Parse command line arguments. The passed in values are ignored on Windows.
 	AppInitCommandLine(0, NULL);
@@ -79,30 +80,30 @@ void ClientAppInit(ofxCEFClient *ofx, std::string startResource, CefRefPtr<CefDO
 	// Populate the settings based on command line arguments.
 	AppGetSettings(appSettings);
 
-	CefInitialize(main_args, appSettings, app.get());
+	CefInitialize(main_args, appSettings, sClientApp.get());
+}
 
+CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFClient *ofx, std::string startResource) {
 	// OSR Browser =======================================================
-
 	CefBrowserSettings settings;
 
 	// Create the single static handler class instance
 	HWND hWnd = WindowFromDC(wglGetCurrentDC());
 	myClientHandler = new ClientHandler();
 	myClientHandler->SetOfxPtr(ofx); 
-	myClientHandler->setDomVisitor(domVisitor);
-	myClientHandler->setRect(ofRectangle(0, 0, width, height));
+	
+	sClientApp->setCurrentClientHandler(myClientHandler);
 
 	CefWindowInfo info;
-	info.width = width;
-	info.height = height;
+	info.width = ofx->getWidth();
+	info.height = ofx->getHeight();
 	info.SetAsOffScreen(hWnd);
 	info.SetTransparentPainting(true);
 	//info.SetAsChild(hWnd, rect); 
 	//info.SetAsPopup(hWnd, "hehe"); 
 
 	// Create the new child browser window using an offscreen window
-	CefBrowserHost::CreateBrowser(info, myClientHandler.get(), CefString(startResource), settings, NULL);
-
+	return CefBrowserHost::CreateBrowserSync(info, myClientHandler.get(), CefString(startResource), settings, NULL);
 }
 
 // Global functions

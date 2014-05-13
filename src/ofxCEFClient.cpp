@@ -9,8 +9,6 @@
 extern CefRefPtr<ClientHandler> myClientHandler;
 
 ofxCEFClient::ofxCEFClient() {
-	_cef_buffer.clear();
-
 	_initialized = false; 
 
 	mLoadedTexture = false;
@@ -18,7 +16,6 @@ ofxCEFClient::ofxCEFClient() {
 }
 
 ofxCEFClient::~ofxCEFClient() {
-
 }
 
 void ofxCEFClient::enableEvents() {
@@ -38,16 +35,20 @@ void ofxCEFClient::enableEvents() {
 }
 
 // startupResource is presently not used, rather hard coded to an index.html below. 
-void ofxCEFClient::init(std::string startupResource, CefRefPtr<CefDOMVisitor> domVisitor, int width, int height) {
-	if (width == -1)
-		width = ofGetWidth();
-	if (height == -1)
-		height = ofGetHeight();
+void ofxCEFClient::init() {
+	ClientAppInit(this); 
+	_initialized = true;
 
-	this->width = width;
-	this->height = height;
-	_cef_buffer.clear();
-	_cef_buffer.allocate(width, height, GL_RGBA, false); 
+}
+
+
+void ofxCEFClient::createBrowser(std::string startupResource, int width, int height, string js) {
+	if (!_initialized)
+		init();
+
+	this->width = (width == -1) ? ofGetWidth() : width;
+	this->height = (height == -1) ? ofGetHeight() : height;
+	mJavascript = js;
 
 	ofFilePath pathUtil; 
 
@@ -58,7 +59,8 @@ void ofxCEFClient::init(std::string startupResource, CefRefPtr<CefDOMVisitor> do
 	startupResource = "file:\\\\" + startupResource;
 	ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
 
-	ClientAppInit(this, startupResource, domVisitor, width, height); 
+	mBrowser = ClientAppCreateBrowser(this, startupResource); 
+	
 }
 
 void ofxCEFClient::loop() {
@@ -106,12 +108,16 @@ void ofxCEFClient::loadedTexture() {
 
 
 void ofxCEFClient::loadTex(ofTexture * texture, ofPixels &pixels) {
-	while (!mLoadedTexture)
-		Sleep(1);
+	while (!mLoadedTexture) {
+		CefDoMessageLoopWork();
+	}
 
 	pixels.swap(_buffer);
 	texture->loadData(pixels); 
 	myClientHandler.get()->buffer = NULL;
+
+	mLoadedTexture = false;
+	_buffer.clear();
 }
 
 

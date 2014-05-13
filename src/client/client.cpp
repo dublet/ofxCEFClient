@@ -52,7 +52,7 @@ void AppGetSettings(CefSettings& settings) {
 
 #if defined(OS_WIN)
   // okay...
-  settings.multi_threaded_message_loop = true;
+  settings.multi_threaded_message_loop = false;
 #endif
 
   // Set cache path
