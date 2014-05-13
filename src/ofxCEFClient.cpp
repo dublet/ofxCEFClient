@@ -118,12 +118,13 @@ void ofxCEFClient::loadTex(ofTexture * texture, ofPixels &pixels) {
 
 	mLoadedTexture = false;
 	_buffer.clear();
+	
+	myClientHandler->CloseAllBrowsers(true);
 }
 
 
 void ofxCEFClient::paint() {
 
-	_cef_buffer.draw(0, 0, width, height); 
 
 }
 
