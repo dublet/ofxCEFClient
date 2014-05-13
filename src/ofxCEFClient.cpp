@@ -58,67 +58,28 @@ void ofxCEFClient::createBrowser(std::string startupResource, int width, int hei
 	}
 	startupResource = "file:\\\\" + startupResource;
 	ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
-
+	_buffer.clear();
 	mBrowser = ClientAppCreateBrowser(this, startupResource); 
 	
 }
 
 void ofxCEFClient::loop() {
-	
-	// This doesn't work quite right. The idea was to set buffer, width, and height but they return junk values
-	// so the ->doneLoading flag needs to work better.
-
-	if (myClientHandler.get()->hasBrowser() == true && _initialized == false) {
-
-		_initialized = true; 
-		_browserHost = myClientHandler.get()->GetBrowser()->GetHost();
-		enableEvents(); 
-
-	} 
-
-	if (!_initialized) {
-		ofLogError() << "CEF Client Not Initialized \n";
-		return; 
-	}
-	
-	//  TOFIX: It's really not ideal to set these pointers constantly... 
-	if (mLoadedTexture) {
-
-		mLoadedTexture = false; 
-		
-		buffer = (unsigned char *) myClientHandler.get()->buffer; 
-		//width = myClientHandler.get()->width; 
-		//height = myClientHandler.get()->height; 
-
-		_cef_buffer.loadData(buffer, width, height, GL_BGRA);
-
-	}
-#if 0
-	testApp* myApp = (testApp*)ofGetAppPtr();
-	CefRefPtr<CefProcessMessage> newMsg; 
-	if (jsEventQueue.fetch(newMsg)) 
-		myApp->cefMessageCallback(newMsg);
-#endif
 }
 
 void ofxCEFClient::loadedTexture() {
 	 _buffer.setFromPixels((unsigned char *)myClientHandler.get()->buffer, width, height, 4);
-	 mLoadedTexture = true; 
+	 mLoadedTexture = true;
 }
 
 
 void ofxCEFClient::loadTex(ofTexture * texture, ofPixels &pixels) {
-	while (!mLoadedTexture) {
+	while (mBrowser->IsLoading() || !mLoadedTexture || !_buffer.isAllocated()) {
 		CefDoMessageLoopWork();
 	}
 
 	pixels.swap(_buffer);
 	texture->loadData(pixels); 
-	myClientHandler.get()->buffer = NULL;
 
-	mLoadedTexture = false;
-	_buffer.clear();
-	
 	myClientHandler->CloseAllBrowsers(true);
 }
 
