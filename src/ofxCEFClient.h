@@ -61,7 +61,7 @@ public:
 	void messageCallback(CefRefPtr<CefProcessMessage> message); 
 
 	
-	void loadTex(ofTexture *, ofPixels &); 
+	void loadTex(ofTexture *); 
 
 	void loadedTexture();
 
@@ -88,8 +88,7 @@ private:
 
 	CefRefPtr<CefBrowserHost> _browserHost; 
 
-	ofTexture _cef_buffer; 
-	ofPixels _buffer;
+	ofTexture *mTexture; 
 
 	bool _initialized; 
 

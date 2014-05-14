@@ -58,7 +58,7 @@ void ofxCEFClient::createBrowser(std::string startupResource, int width, int hei
 	}
 	startupResource = "file:\\\\" + startupResource;
 	ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
-	_buffer.clear();
+	mTexture = NULL;
 	mBrowser = ClientAppCreateBrowser(this, startupResource); 
 	
 }
@@ -67,18 +67,23 @@ void ofxCEFClient::loop() {
 }
 
 void ofxCEFClient::loadedTexture() {
-	 _buffer.setFromPixels((unsigned char *)myClientHandler.get()->buffer, width, height, 4);
-	 mLoadedTexture = true;
+	assert(mTexture);
+	
+	// Load data will allocate but somehow allocating with GL_BGRA results in a 
+	// all white texture.
+	mTexture->allocate(width, height, GL_RGBA);
+	unsigned char *buffer = (unsigned char *)myClientHandler.get()->buffer;
+	mTexture->loadData(buffer, width, height, GL_BGRA);
+	mLoadedTexture = true;
 }
 
 
-void ofxCEFClient::loadTex(ofTexture * texture, ofPixels &pixels) {
-	while (mBrowser->IsLoading() || !mLoadedTexture || !_buffer.isAllocated()) {
+void ofxCEFClient::loadTex(ofTexture * texture) {
+	mTexture = texture;
+
+	while (mBrowser->IsLoading() || !mLoadedTexture || !mTexture->isAllocated()) {
 		CefDoMessageLoopWork();
 	}
-
-	pixels.swap(_buffer);
-	texture->loadData(pixels); 
 
 	myClientHandler->CloseAllBrowsers(true);
 }
