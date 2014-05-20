@@ -58,7 +58,9 @@ void ofxCEFClient::createBrowser(std::string startupResource, int width, int hei
 	}
 	startupResource = "file:\\\\" + startupResource;
 	ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
+	mPixels = NULL;
 	mTexture = NULL;
+
 	mBrowser = ClientAppCreateBrowser(this, startupResource); 
 	
 }
@@ -67,19 +69,38 @@ void ofxCEFClient::loop() {
 }
 
 void ofxCEFClient::loadedTexture() {
-	assert(mTexture);
+	if (mLoadIntoPixels) {
+		assert(mPixels);
 	
-	// Load data will allocate but somehow allocating with GL_BGRA results in a 
-	// all white texture.
-	mTexture->allocate(width, height, GL_RGBA);
-	unsigned char *buffer = (unsigned char *)myClientHandler.get()->buffer;
-	mTexture->loadData(buffer, width, height, GL_BGRA);
+		unsigned char *buffer = (unsigned char *)myClientHandler.get()->buffer;
+		mPixels->setFromPixels(buffer, width, height, 4);
+	} else {
+		assert(mTexture);
+	
+		// Load data will allocate but somehow allocating with GL_BGRA results in a 
+		// all white texture.
+		mTexture->allocate(width, height, GL_RGBA);
+		unsigned char *buffer = (unsigned char *)myClientHandler.get()->buffer;
+		mTexture->loadData(buffer, width, height, GL_BGRA);
+	}
 	mLoadedTexture = true;
 }
 
 
+void ofxCEFClient::loadTex(ofPixels * texture) {
+	mPixels = texture;
+	mLoadIntoPixels = true;
+
+	while (mBrowser->IsLoading() || !mLoadedTexture || !mPixels->isAllocated()) {
+		CefDoMessageLoopWork();
+	}
+
+	myClientHandler->CloseAllBrowsers(true);
+}
+
 void ofxCEFClient::loadTex(ofTexture * texture) {
 	mTexture = texture;
+	mLoadIntoPixels = false;
 
 	while (mBrowser->IsLoading() || !mLoadedTexture || !mTexture->isAllocated()) {
 		CefDoMessageLoopWork();
