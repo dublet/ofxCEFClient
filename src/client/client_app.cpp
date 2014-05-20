@@ -187,7 +187,7 @@ namespace {
 
 ClientApp::ClientApp()
 {
-	ofLogNotice() << (__FUNCTION__) << std::endl;
+	//ofLogNotice() << (__FUNCTION__) << std::endl;
 
 
 	CreateBrowserDelegates(browser_delegates_);
@@ -230,7 +230,7 @@ bool ClientApp::RemoveMessageCallback(const std::string &message_name,
 void ClientApp::OnContextInitialized()
 {
 
-	ofLogNotice() << (__FUNCTION__) << std::endl;
+	//ofLogNotice() << (__FUNCTION__) << std::endl;
 
 
 	// Register cookieable schemes with the global cookie manager.
@@ -268,8 +268,7 @@ void ClientApp::OnRenderThreadCreated(CefRefPtr<CefListValue> extra_info)
 }
 
 void ClientApp::OnWebKitInitialized() {
-
-	ofLogNotice() << (__FUNCTION__) << std::endl;
+	//ofLogNotice() << (__FUNCTION__) << std::endl;
 
 	// Register the client_app extension.
 	std::string app_code =
@@ -317,7 +316,7 @@ void ClientApp::OnWebKitInitialized() {
 void ClientApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser)
 {
 	
-	ofLogNotice() << (__FUNCTION__) << std::endl;
+	//ofLogNotice() << (__FUNCTION__) << std::endl;
 
 	RenderDelegateSet::iterator it = render_delegates_.begin();
 	for (; it != render_delegates_.end(); ++it)
@@ -327,7 +326,7 @@ void ClientApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser)
 void ClientApp::OnBrowserDestroyed(CefRefPtr<CefBrowser> browser)
 {
 
-	ofLogNotice() << (__FUNCTION__) << std::endl;
+	//ofLogNotice() << (__FUNCTION__) << std::endl;
 
 	RenderDelegateSet::iterator it = render_delegates_.begin();
 	for (; it != render_delegates_.end(); ++it)
@@ -409,7 +408,7 @@ void ClientApp::OnFocusedNodeChanged(CefRefPtr<CefBrowser> browser, CefRefPtr<Ce
 
 bool ClientApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
 
-	ofLogNotice() << (__FUNCTION__) << std::endl;
+	//ofLogNotice() << (__FUNCTION__) << std::endl;
 
 	ASSERT(source_process == PID_BROWSER);
 

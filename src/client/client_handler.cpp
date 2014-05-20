@@ -86,7 +86,7 @@ ClientHandler::ClientHandler()
 	  m_bFocusOnEditableField(false),  buffer(0)
 {
 
-	ofLogNotice() << (__FUNCTION__) << std::endl;
+	//ofLogNotice() << (__FUNCTION__) << std::endl;
 
 	CreateProcessMessageDelegates(process_message_delegates_);
 
@@ -121,7 +121,7 @@ bool ClientHandler::OnProcessMessageReceived(
     CefRefPtr<CefProcessMessage> message)
 {
 
-	ofLogNotice() << (__FUNCTION__) << std::endl;
+	//ofLogNotice() << (__FUNCTION__) << std::endl;
 
 	// Check for messages from the client renderer.
 	std::string message_name = message->GetName();
