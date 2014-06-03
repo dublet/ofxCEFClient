@@ -103,7 +103,7 @@ CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFClient *ofx, std::string st
 	//info.SetAsPopup(hWnd, "hehe"); 
 
 	// Create the new child browser window using an offscreen window
-	return CefBrowserHost::CreateBrowserSync(info, myClientHandler.get(), CefString(startResource), settings, NULL);
+	return CefBrowserHost::CreateBrowserSync(info, myClientHandler.get(), CefString(startResource), settings);
 }
 
 // Global functions

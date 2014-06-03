@@ -1,4 +1,4 @@
-// Copyright (c) 2013 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2014 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -10,13 +10,13 @@
 // for more information.
 //
 
-#include "libcef_dll/cpptoc/load_handler_cpptoc.h"
 #include "libcef_dll/cpptoc/render_process_handler_cpptoc.h"
 #include "libcef_dll/ctocpp/browser_ctocpp.h"
 #include "libcef_dll/ctocpp/domnode_ctocpp.h"
 #include "libcef_dll/ctocpp/frame_ctocpp.h"
 #include "libcef_dll/ctocpp/list_value_ctocpp.h"
 #include "libcef_dll/ctocpp/process_message_ctocpp.h"
+#include "libcef_dll/ctocpp/request_ctocpp.h"
 #include "libcef_dll/ctocpp/v8context_ctocpp.h"
 #include "libcef_dll/ctocpp/v8exception_ctocpp.h"
 #include "libcef_dll/ctocpp/v8stack_trace_ctocpp.h"
@@ -88,20 +88,38 @@ void CEF_CALLBACK render_process_handler_on_browser_destroyed(
       CefBrowserCToCpp::Wrap(browser));
 }
 
-cef_load_handler_t* CEF_CALLBACK render_process_handler_get_load_handler(
-    struct _cef_render_process_handler_t* self) {
+int CEF_CALLBACK render_process_handler_on_before_navigation(
+    struct _cef_render_process_handler_t* self, cef_browser_t* browser,
+    cef_frame_t* frame, struct _cef_request_t* request,
+    enum cef_navigation_type_t navigation_type, int is_redirect) {
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
 
   DCHECK(self);
   if (!self)
-    return NULL;
+    return 0;
+  // Verify param: browser; type: refptr_diff
+  DCHECK(browser);
+  if (!browser)
+    return 0;
+  // Verify param: frame; type: refptr_diff
+  DCHECK(frame);
+  if (!frame)
+    return 0;
+  // Verify param: request; type: refptr_diff
+  DCHECK(request);
+  if (!request)
+    return 0;
 
   // Execute
-  CefRefPtr<CefLoadHandler> _retval = CefRenderProcessHandlerCppToC::Get(
-      self)->GetLoadHandler();
+  bool _retval = CefRenderProcessHandlerCppToC::Get(self)->OnBeforeNavigation(
+      CefBrowserCToCpp::Wrap(browser),
+      CefFrameCToCpp::Wrap(frame),
+      CefRequestCToCpp::Wrap(request),
+      navigation_type,
+      is_redirect?true:false);
 
-  // Return type: refptr_same
-  return CefLoadHandlerCppToC::Wrap(_retval);
+  // Return type: bool
+  return _retval;
 }
 
 void CEF_CALLBACK render_process_handler_on_context_created(
@@ -264,7 +282,8 @@ CefRenderProcessHandlerCppToC::CefRenderProcessHandlerCppToC(
       render_process_handler_on_browser_created;
   struct_.struct_.on_browser_destroyed =
       render_process_handler_on_browser_destroyed;
-  struct_.struct_.get_load_handler = render_process_handler_get_load_handler;
+  struct_.struct_.on_before_navigation =
+      render_process_handler_on_before_navigation;
   struct_.struct_.on_context_created =
       render_process_handler_on_context_created;
   struct_.struct_.on_context_released =

@@ -376,6 +376,7 @@ struct CefSettingsTraits {
     target->uncaught_exception_stack_size = src->uncaught_exception_stack_size;
     target->context_safety_implementation = src->context_safety_implementation;
     target->ignore_certificate_errors = src->ignore_certificate_errors;
+    target->background_color = src->background_color;
   }
 };
 
@@ -449,6 +450,7 @@ struct CefBrowserSettingsTraits {
         src->image_shrink_standalone_to_fit;
     target->text_area_resize = src->text_area_resize;
     target->tab_to_links = src->tab_to_links;
+    target->author_and_user_styles = src->author_and_user_styles;
     target->local_storage = src->local_storage;
     target->databases= src->databases;
     target->application_cache = src->application_cache;

@@ -1,4 +1,4 @@
-// Copyright (c) 2013 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2014 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -14,7 +14,6 @@
 #include "libcef_dll/cpptoc/run_file_dialog_callback_cpptoc.h"
 #include "libcef_dll/ctocpp/browser_ctocpp.h"
 #include "libcef_dll/ctocpp/browser_host_ctocpp.h"
-#include "libcef_dll/ctocpp/request_context_ctocpp.h"
 #include "libcef_dll/transfer_util.h"
 
 
@@ -22,19 +21,17 @@
 
 bool CefBrowserHost::CreateBrowser(const CefWindowInfo& windowInfo,
     CefRefPtr<CefClient> client, const CefString& url,
-    const CefBrowserSettings& settings,
-    CefRefPtr<CefRequestContext> request_context) {
+    const CefBrowserSettings& settings) {
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
 
-  // Unverified params: client, url, request_context
+  // Unverified params: client, url
 
   // Execute
   int _retval = cef_browser_host_create_browser(
       &windowInfo,
       CefClientCppToC::Wrap(client),
       url.GetStruct(),
-      &settings,
-      CefRequestContextCToCpp::Unwrap(request_context));
+      &settings);
 
   // Return type: bool
   return _retval?true:false;
@@ -42,19 +39,17 @@ bool CefBrowserHost::CreateBrowser(const CefWindowInfo& windowInfo,
 
 CefRefPtr<CefBrowser> CefBrowserHost::CreateBrowserSync(
     const CefWindowInfo& windowInfo, CefRefPtr<CefClient> client,
-    const CefString& url, const CefBrowserSettings& settings,
-    CefRefPtr<CefRequestContext> request_context) {
+    const CefString& url, const CefBrowserSettings& settings) {
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
 
-  // Unverified params: client, url, request_context
+  // Unverified params: client, url
 
   // Execute
   cef_browser_t* _retval = cef_browser_host_create_browser_sync(
       &windowInfo,
       CefClientCppToC::Wrap(client),
       url.GetStruct(),
-      &settings,
-      CefRequestContextCToCpp::Unwrap(request_context));
+      &settings);
 
   // Return type: refptr_same
   return CefBrowserCToCpp::Wrap(_retval);
@@ -147,17 +142,20 @@ CefRefPtr<CefClient> CefBrowserHostCToCpp::GetClient() {
   return CefClientCppToC::Unwrap(_retval);
 }
 
-CefRefPtr<CefRequestContext> CefBrowserHostCToCpp::GetRequestContext() {
-  if (CEF_MEMBER_MISSING(struct_, get_request_context))
-    return NULL;
+CefString CefBrowserHostCToCpp::GetDevToolsURL(bool http_scheme) {
+  if (CEF_MEMBER_MISSING(struct_, get_dev_tools_url))
+    return CefString();
 
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
 
   // Execute
-  cef_request_context_t* _retval = struct_->get_request_context(struct_);
+  cef_string_userfree_t _retval = struct_->get_dev_tools_url(struct_,
+      http_scheme);
 
-  // Return type: refptr_same
-  return CefRequestContextCToCpp::Wrap(_retval);
+  // Return type: string
+  CefString _retvalStr;
+  _retvalStr.AttachToUserFree(_retval);
+  return _retvalStr;
 }
 
 double CefBrowserHostCToCpp::GetZoomLevel() {
@@ -274,35 +272,6 @@ void CefBrowserHostCToCpp::StopFinding(bool clearSelection) {
   // Execute
   struct_->stop_finding(struct_,
       clearSelection);
-}
-
-void CefBrowserHostCToCpp::ShowDevTools(const CefWindowInfo& windowInfo,
-    CefRefPtr<CefClient> client, const CefBrowserSettings& settings) {
-  if (CEF_MEMBER_MISSING(struct_, show_dev_tools))
-    return;
-
-  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
-
-  // Verify param: client; type: refptr_diff
-  DCHECK(client.get());
-  if (!client.get())
-    return;
-
-  // Execute
-  struct_->show_dev_tools(struct_,
-      &windowInfo,
-      CefClientCppToC::Wrap(client),
-      &settings);
-}
-
-void CefBrowserHostCToCpp::CloseDevTools() {
-  if (CEF_MEMBER_MISSING(struct_, close_dev_tools))
-    return;
-
-  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
-
-  // Execute
-  struct_->close_dev_tools(struct_);
 }
 
 void CefBrowserHostCToCpp::SetMouseCursorChangeDisabled(bool disabled) {

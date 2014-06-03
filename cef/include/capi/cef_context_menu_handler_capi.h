@@ -1,4 +1,4 @@
-// Copyright (c) 2013 Marshall A. Greenblatt. All rights reserved.
+// Copyright (c) 2014 Marshall A. Greenblatt. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -145,11 +145,9 @@ typedef struct _cef_context_menu_params_t {
       struct _cef_context_menu_params_t* self);
 
   ///
-  // Returns true (1) if the context menu was invoked on an image which has non-
-  // NULL contents.
+  // Returns true (1) if the context menu was invoked on a blocked image.
   ///
-  int (CEF_CALLBACK *has_image_contents)(
-      struct _cef_context_menu_params_t* self);
+  int (CEF_CALLBACK *is_image_blocked)(struct _cef_context_menu_params_t* self);
 
   ///
   // Returns the URL of the top level page that the context menu was invoked on.

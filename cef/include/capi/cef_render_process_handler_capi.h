@@ -1,4 +1,4 @@
-// Copyright (c) 2013 Marshall A. Greenblatt. All rights reserved.
+// Copyright (c) 2014 Marshall A. Greenblatt. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -89,10 +89,15 @@ typedef struct _cef_render_process_handler_t {
       struct _cef_browser_t* browser);
 
   ///
-  // Return the handler for browser load status events.
+  // Called before browser navigation. Return true (1) to cancel the navigation
+  // or false (0) to allow the navigation to proceed. The |request| object
+  // cannot be modified in this callback.
   ///
-  struct _cef_load_handler_t* (CEF_CALLBACK *get_load_handler)(
-      struct _cef_render_process_handler_t* self);
+  int (CEF_CALLBACK *on_before_navigation)(
+      struct _cef_render_process_handler_t* self,
+      struct _cef_browser_t* browser, struct _cef_frame_t* frame,
+      struct _cef_request_t* request,
+      enum cef_navigation_type_t navigation_type, int is_redirect);
 
   ///
   // Called immediately after the V8 context for a frame has been created. To
