@@ -5,7 +5,7 @@
 #define CEF_TESTS_CEFCLIENT_CLIENT_HANDLER_H_
 #pragma once
 
-#include "ofxCEFClient.h"
+#include "ofxCEFBrowser.h"
 
 #include <list>
 #include <map>
@@ -253,15 +253,15 @@ class ClientHandler : public CefClient,
 		                     int height) OVERRIDE;
 
 		virtual void ForwardMessageToOfx(CefRefPtr<CefProcessMessage> message){
-			ofxClient->messageCallback(message); 
+			ofxClientBrowser->messageCallback(message); 
 		}
 
-		virtual void SetOfxPtr(ofxCEFClient *client) {
-			this->ofxClient = client; 
+		virtual void SetOfxPtr(ofxCEFBrowser *client) {
+			this->ofxClientBrowser = client; 
 		}
 
 		void *buffer; 
-		ofxCEFClient *ofxClient; 
+		ofxCEFBrowser *ofxClientBrowser; 
 
 		virtual void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor) OVERRIDE;
 

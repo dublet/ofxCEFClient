@@ -2,7 +2,7 @@
 // Copyright (c) 2013 Intel Corporation
 
 #include "ofMain.h"
-#include "ofxCEFClient.h"
+#include "ofxCEFBrowser.h"
 
 #include "WinBase.h"
 #include "client.h"
@@ -56,7 +56,7 @@ class MainBrowserProvider {
 static CefRefPtr<ClientApp> sClientApp;
 // http://stackoverflow.com/questions/15462064/hinstance-in-createwindow
 
-void ClientAppInit(ofxCEFClient *ofx) {
+void ClientAppInit() {
 	
 	// Init =======================================================
 
@@ -83,7 +83,7 @@ void ClientAppInit(ofxCEFClient *ofx) {
 	CefInitialize(main_args, appSettings, sClientApp.get());
 }
 
-CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFClient *ofx, std::string startResource) {
+CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFBrowser *ofx, std::string startResource) {
 	// OSR Browser =======================================================
 	CefBrowserSettings settings;
 

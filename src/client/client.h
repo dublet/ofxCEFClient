@@ -20,11 +20,11 @@
 class CefApp;
 class CefBrowser;
 class CefCommandLine;
-class ofxCEFClient; 
+class ofxCEFBrowser; 
 
-void ClientAppInit(ofxCEFClient *ofx);
+void ClientAppInit();
 
-CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFClient *ofx, std::string startResource);
+CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFBrowser *ofx, std::string startResource);
 
 
 // Returns the main browser window instance.
