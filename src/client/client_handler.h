@@ -260,7 +260,6 @@ class ClientHandler : public CefClient,
 			this->ofxClientBrowser = client; 
 		}
 
-		void *buffer; 
 		ofxCEFBrowser *ofxClientBrowser; 
 
 		virtual void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor) OVERRIDE;

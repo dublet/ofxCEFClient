@@ -83,7 +83,7 @@ int ClientHandler::m_BrowserCount = 0;
 ClientHandler::ClientHandler()
 	: m_BrowserId(0),
 	  m_bIsClosing(false),
-	  m_bFocusOnEditableField(false),  buffer(0)
+	  m_bFocusOnEditableField(false)
 {
 
 	//ofLogNotice() << (__FUNCTION__) << std::endl;
@@ -581,14 +581,13 @@ void ClientHandler::OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect &re
 
 void ClientHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
-	this->buffer = const_cast<void*>(buffer);
 	if (width != ofxClientBrowser->getWidth() || height != ofxClientBrowser->getHeight()) {
 		ofLogNotice("ClientHandler", "Width and height mismatch between rectangle and draw region");
 	}
 
 	if (((const unsigned char *)buffer)[3] == 0xff) 
 	// Nerp -- fix this 
-	ofxClientBrowser->loadedTexture(); 
+	ofxClientBrowser->loadedTexture(buffer); 
 
 }
 

@@ -53,11 +53,11 @@ void ofxCEFBrowser::close() {
 	myClientHandler->DoClose(mBrowser);
 }
 
-void ofxCEFBrowser::loadedTexture() {
+void ofxCEFBrowser::loadedTexture(const void *buffer) {
 	if (mLoadIntoPixels) {
 		assert(mPixels);
 	
-		unsigned char *buffer = (unsigned char *)myClientHandler.get()->buffer;
+		unsigned char *buffer = (unsigned char *)buffer;
 		mPixels->setFromPixels(buffer, width, height, 4);
 	} else {
 		assert(mTexture);
@@ -70,7 +70,7 @@ void ofxCEFBrowser::loadedTexture() {
 			assert(mTexture->getHeight() == height);
 			assert(mTexture->getWidth() == width);
 		}
-		unsigned char *buffer = (unsigned char *)myClientHandler.get()->buffer;
+		unsigned char *buffer = (unsigned char *)buffer;
 		mTexture->loadData(buffer, width, height, GL_BGRA);
 	}
 	mLoadedTexture = true;
