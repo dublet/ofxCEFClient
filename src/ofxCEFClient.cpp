@@ -28,13 +28,14 @@ ofxCEFClient::~ofxCEFClient() {
 
 // startupResource is presently not used, rather hard coded to an index.html below. 
 void ofxCEFClient::init() {
-	ClientAppInit(); 
-	_initialized = true;
+	if (!_initialized) {
+		ClientAppInit(); 
+		_initialized = true;
+	}
 }
 
 std::shared_ptr<ofxCEFBrowser> ofxCEFClient::createBrowser(std::string startupResource, int width, int height, string js) {
-	if (!_initialized)
-		init();
+	assert (_initialized);
 
 	return std::shared_ptr<ofxCEFBrowser>(new ofxCEFBrowser(startupResource, width, height, js));
 }
