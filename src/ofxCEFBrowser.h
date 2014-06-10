@@ -49,7 +49,7 @@ public:
 	void loadTex(ofPixels *); 
 	void loadTex(ofTexture *); 
 
-	void loadedTexture();
+	void loadedTexture(const void *);
 
 	int getWidth() { return width; }
 	int getHeight() { return height; }
