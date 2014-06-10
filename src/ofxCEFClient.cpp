@@ -95,7 +95,7 @@ void ofxCEFClient::loadTex(ofPixels * texture) {
 		CefDoMessageLoopWork();
 	}
 
-	myClientHandler->CloseAllBrowsers(true);
+	myClientHandler->DoClose(mBrowser);
 }
 
 void ofxCEFClient::loadTex(ofTexture * texture) {
@@ -106,7 +106,7 @@ void ofxCEFClient::loadTex(ofTexture * texture) {
 		CefDoMessageLoopWork();
 	}
 
-	myClientHandler->CloseAllBrowsers(true);
+	myClientHandler->DoClose(mBrowser);
 }
 
 
