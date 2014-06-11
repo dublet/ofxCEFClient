@@ -165,10 +165,15 @@ namespace {
 						handled = true;
 					}
 				} else if (name == "onLoad") {
-					std::string &javascript = client_app_->getCurrentClientHandler()->ofxClient->getJavascript();
-					auto frame  = CefV8Context::GetCurrentContext()->GetBrowser()->GetMainFrame();
-					frame->ExecuteJavaScript(javascript.c_str(), frame->GetURL(), 0);
-					handled = true;
+					auto clientHandler = client_app_->getCurrentClientHandler();
+					if (clientHandler) {
+						if (clientHandler->ofxClient) {
+							std::string &javascript = clientHandler->ofxClient->getJavascript();
+							auto frame  = CefV8Context::GetCurrentContext()->GetBrowser()->GetMainFrame();
+							frame->ExecuteJavaScript(javascript.c_str(), frame->GetURL(), 0);
+							handled = true;
+						}
+					}
 				}
 
 				if (!handled)
