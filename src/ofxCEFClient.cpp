@@ -34,6 +34,11 @@ void ofxCEFClient::init() {
 	}
 }
 
+
+void ofxCEFClient::processEvent() {
+	CefDoMessageLoopWork();
+}
+
 std::shared_ptr<ofxCEFBrowser> ofxCEFClient::createBrowser(int width, int height, string js) {
 	assert (_initialized);
 

@@ -23,6 +23,8 @@ public:
 	
 	void init();
 
+	void processEvent();
+
 	std::shared_ptr<ofxCEFBrowser> createBrowser(int width = -1, int height = -1, string js = "");
 private:
 
