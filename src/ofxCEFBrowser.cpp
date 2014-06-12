@@ -12,12 +12,10 @@ ofxCEFBrowser::ofxCEFBrowser()
 : width(-1), height(-1), mPixels(NULL), mTexture(NULL) {
 }
 
-ofxCEFBrowser::ofxCEFBrowser(std::string startupResource, int width, int height, string js) {
+ofxCEFBrowser::ofxCEFBrowser(std::string startupResource, int width, int height, string js)
+: mPixels(NULL), mTexture(NULL), mJavascript(js) {
 	width = (width == -1) ? ofGetWidth() : width;
 	height = (height == -1) ? ofGetHeight() : height;
-	mJavascript = js;
-
-	ofFilePath pathUtil; 
 
 	//string startResource = "file:\\\\" + pathUtil.getCurrentWorkingDirectory() + "interface\\index.html"; 
 	if (startupResource.empty() || startupResource == "") {
@@ -25,8 +23,6 @@ ofxCEFBrowser::ofxCEFBrowser(std::string startupResource, int width, int height,
 	}
 	startupResource = "file:\\\\" + startupResource;
 	ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
-	mPixels = NULL;
-	mTexture = NULL;
 
 	mBrowser = ClientAppCreateBrowser(this, startupResource); 
 
