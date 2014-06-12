@@ -12,11 +12,13 @@ ofxCEFBrowser::ofxCEFBrowser()
 : width(-1), height(-1), mPixels(NULL), mTexture(NULL) {
 }
 
-ofxCEFBrowser::ofxCEFBrowser(std::string startupResource, int width, int height, string js)
+ofxCEFBrowser::ofxCEFBrowser(int width, int height, string js)
 : mPixels(NULL), mTexture(NULL), mJavascript(js) {
 	width = (width == -1) ? ofGetWidth() : width;
 	height = (height == -1) ? ofGetHeight() : height;
+}
 
+void ofxCEFBrowser::browseTo(std::string startupResource) {
 	//string startResource = "file:\\\\" + pathUtil.getCurrentWorkingDirectory() + "interface\\index.html"; 
 	if (startupResource.empty() || startupResource == "") {
 		startupResource = ofFilePath::getAbsolutePath("tile-small.html", true);
@@ -24,7 +26,7 @@ ofxCEFBrowser::ofxCEFBrowser(std::string startupResource, int width, int height,
 	startupResource = "file:\\\\" + startupResource;
 	ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
 
-	mBrowser = ClientAppCreateBrowser(this, startupResource); 
+	mBrowser = ClientAppCreateBrowser(shared_from_this(), startupResource); 
 	assert(mBrowser);
 	_browserHost = mBrowser->GetHost();
 }

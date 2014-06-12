@@ -83,15 +83,13 @@ void ClientAppInit() {
 	CefInitialize(main_args, appSettings, sClientApp.get());
 }
 
-CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFBrowser *ofx, std::string startResource) {
+CefRefPtr< CefBrowser > ClientAppCreateBrowser(std::shared_ptr<ofxCEFBrowser> ofx, std::string startResource) {
 	// OSR Browser =======================================================
 	CefBrowserSettings settings;
 
 	// Create the single static handler class instance
 	HWND hWnd = WindowFromDC(wglGetCurrentDC());
 	myClientHandler = new ClientHandler();
-	myClientHandler->SetOfxPtr(ofx); 
-	
 	sClientApp->setCurrentClientHandler(myClientHandler);
 
 	CefWindowInfo info;
@@ -103,7 +101,11 @@ CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFBrowser *ofx, std::string s
 	//info.SetAsPopup(hWnd, "hehe"); 
 
 	// Create the new child browser window using an offscreen window
-	return CefBrowserHost::CreateBrowserSync(info, myClientHandler.get(), CefString(startResource), settings);
+	auto browser =  CefBrowserHost::CreateBrowserSync(info, myClientHandler.get(), CefString(startResource), settings);
+	
+	myClientHandler->setClient(browser, ofx); 
+
+	return browser;
 }
 
 // Global functions

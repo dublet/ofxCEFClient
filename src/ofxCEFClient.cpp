@@ -34,10 +34,10 @@ void ofxCEFClient::init() {
 	}
 }
 
-std::shared_ptr<ofxCEFBrowser> ofxCEFClient::createBrowser(std::string startupResource, int width, int height, string js) {
+std::shared_ptr<ofxCEFBrowser> ofxCEFClient::createBrowser(int width, int height, string js) {
 	assert (_initialized);
 
-	return std::shared_ptr<ofxCEFBrowser>(new ofxCEFBrowser(startupResource, width, height, js));
+	return std::shared_ptr<ofxCEFBrowser>(new ofxCEFBrowser(width, height, js));
 }
 
 void ofxCEFClient::_exit(ofEventArgs &e) {

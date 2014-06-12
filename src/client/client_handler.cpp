@@ -531,16 +531,18 @@ void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser,
 
 bool ClientHandler::GetRootScreenRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
-	rect = CefRect(0, 0, ofxClientBrowser->getWidth(), ofxClientBrowser->getHeight());
+	auto client = getClient(browser);
+	rect = CefRect(0, 0, client->getWidth(), client->getHeight());
 	return true;
 }
 
 bool ClientHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
+	auto client = getClient(browser);
 	RECT clientRect;
 	rect.x = rect.y = 0;
-	rect.width = ofxClientBrowser->getWidth();
-	rect.height = ofxClientBrowser->getHeight();
+	rect.width = client->getWidth();
+	rect.height = client->getHeight();
 	return true;
 }
 
@@ -581,13 +583,14 @@ void ClientHandler::OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect &re
 
 void ClientHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
-	if (width != ofxClientBrowser->getWidth() || height != ofxClientBrowser->getHeight()) {
+	auto client = getClient(browser);
+	if (width != client->getWidth() || height != client->getHeight()) {
 		ofLogNotice("ClientHandler", "Width and height mismatch between rectangle and draw region");
 	}
 
 	if (((const unsigned char *)buffer)[3] == 0xff) 
 	// Nerp -- fix this 
-	ofxClientBrowser->loadedTexture(buffer); 
+	client->loadedTexture(buffer); 
 
 }
 

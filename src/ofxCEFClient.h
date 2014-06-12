@@ -23,7 +23,7 @@ public:
 	
 	void init();
 
-	std::shared_ptr<ofxCEFBrowser> createBrowser(std::string startupResource, int width = -1, int height = -1, string js = "");
+	std::shared_ptr<ofxCEFBrowser> createBrowser(int width = -1, int height = -1, string js = "");
 private:
 
 	void _exit(ofEventArgs &e);

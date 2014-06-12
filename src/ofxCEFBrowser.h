@@ -1,9 +1,10 @@
 #pragma once
 
 #include "client.h"
-#include <thread>
-#include <mutex>
 #include <atomic>
+#include <memory>
+#include <mutex>
+#include <thread>
 
 #include "client\client.h"
 
@@ -38,14 +39,17 @@ class message_queue {
 
 };
 
-class ofxCEFBrowser {
+class ofxCEFBrowser : public std::enable_shared_from_this<ofxCEFBrowser> {
 
 
 public:
 	ofxCEFBrowser();
-	ofxCEFBrowser(std::string startupResource, int width, int height, string js);
+	ofxCEFBrowser(int width, int height, string js);
+
 	~ofxCEFBrowser();
-	
+
+	void browseTo(std::string url);
+
 	void loadTex(ofPixels *); 
 	void loadTex(ofTexture *); 
 

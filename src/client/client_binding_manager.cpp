@@ -28,7 +28,7 @@ namespace client_binding_manager {
 
 					std::string message_name = message->GetName();
 
-					handler->ForwardMessageToOfx(message); 
+					handler->ForwardMessageToOfx(browser, message); 
 
 					return true;
 				}

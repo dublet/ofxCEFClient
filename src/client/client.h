@@ -24,7 +24,7 @@ class ofxCEFBrowser;
 
 void ClientAppInit();
 
-CefRefPtr< CefBrowser > ClientAppCreateBrowser(ofxCEFBrowser *ofx, std::string startResource);
+CefRefPtr< CefBrowser > ClientAppCreateBrowser(std::shared_ptr<ofxCEFBrowser> ofx, std::string startResource);
 
 
 // Returns the main browser window instance.

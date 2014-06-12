@@ -252,15 +252,24 @@ class ClientHandler : public CefClient,
 		                     int width,
 		                     int height) OVERRIDE;
 
-		virtual void ForwardMessageToOfx(CefRefPtr<CefProcessMessage> message){
-			ofxClientBrowser->messageCallback(message); 
+		virtual void ForwardMessageToOfx(CefRefPtr<CefBrowser> browser, CefRefPtr<CefProcessMessage> message){
+			getClient(browser)->messageCallback(message); 
 		}
 
-		virtual void SetOfxPtr(ofxCEFBrowser *client) {
-			this->ofxClientBrowser = client; 
+		virtual void setClient(CefRefPtr<CefBrowser> browser, std::shared_ptr<ofxCEFBrowser> client) {
+			ofxClientBrowserMap.insert(make_pair(browser, client));
 		}
 
-		ofxCEFBrowser *ofxClientBrowser; 
+		std::shared_ptr<ofxCEFBrowser> getClient(CefRefPtr<CefBrowser> browser) {
+			auto clientIt = ofxClientBrowserMap.find(browser);
+			if (clientIt != ofxClientBrowserMap.end()) {
+				return clientIt->second;
+			}
+			assert(false);
+			return std::shared_ptr<ofxCEFBrowser>(); 	
+		}
+
+		std::map<CefRefPtr<CefBrowser>, std::shared_ptr<ofxCEFBrowser>> ofxClientBrowserMap; 
 
 		virtual void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor) OVERRIDE;
 
