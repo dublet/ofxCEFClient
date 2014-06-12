@@ -25,7 +25,7 @@ ofxCEFBrowser::ofxCEFBrowser(std::string startupResource, int width, int height,
 	ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
 
 	mBrowser = ClientAppCreateBrowser(this, startupResource); 
-
+	assert(mBrowser);
 	_browserHost = mBrowser->GetHost();
 }
 
@@ -75,6 +75,7 @@ void ofxCEFBrowser::loadedTexture(const void *buffer) {
 
 
 void ofxCEFBrowser::loadTex(ofPixels * texture) {
+	assert(mBrowser);
 	if (!mBrowser)
 		return;
 
