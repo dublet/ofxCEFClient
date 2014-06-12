@@ -11,7 +11,7 @@ class ofxCEFBrowser;
 class ofxCEFClient {
 
 private:
-	static ofxCEFClient *mInstance;
+	static ofxCEFClient mInstance;
 
 	ofxCEFClient();
 	ofxCEFClient(const ofxCEFClient &);

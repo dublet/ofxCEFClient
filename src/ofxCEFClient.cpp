@@ -8,7 +8,7 @@
 // The global ClientHandler reference (defined in client.cpp)
 extern CefRefPtr<ClientHandler> myClientHandler;
 
-ofxCEFClient *ofxCEFClient::mInstance = NULL;
+ofxCEFClient ofxCEFClient::mInstance;
 
 ofxCEFClient::ofxCEFClient() {
 	_initialized = false; 
@@ -20,9 +20,7 @@ ofxCEFClient::~ofxCEFClient() {
 }
 
  ofxCEFClient &ofxCEFClient::getInstance() {
-	 if (!mInstance)
-		 mInstance = new ofxCEFClient();
-	 return *mInstance;
+	 return mInstance;
 }
 
 
