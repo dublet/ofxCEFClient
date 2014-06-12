@@ -30,6 +30,7 @@ ofxCEFBrowser::ofxCEFBrowser(std::string startupResource, int width, int height,
 
 	mBrowser = ClientAppCreateBrowser(this, startupResource); 
 
+	_browserHost = mBrowser->GetHost();
 }
 
 ofxCEFBrowser::~ofxCEFBrowser() {
@@ -223,7 +224,7 @@ void ofxCEFBrowser::sendMessage(std::string name, CefRefPtr <CefListValue> messa
 
 	response->GetArgumentList()->SetList(0, message); 
 
-	_browserHost->GetBrowser()->SendProcessMessage(PID_RENDERER, response);
+	mBrowser->SendProcessMessage(PID_RENDERER, response);
 }
 
 void ofxCEFBrowser::messageCallback(CefRefPtr<CefProcessMessage> message) {
