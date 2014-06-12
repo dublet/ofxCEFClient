@@ -91,6 +91,9 @@ CefRefPtr< CefBrowser > ClientAppCreateBrowser(std::shared_ptr<ofxCEFBrowser> of
 	HWND hWnd = WindowFromDC(wglGetCurrentDC());
 	myClientHandler = new ClientHandler();
 	sClientApp->setCurrentClientHandler(myClientHandler);
+	// We need to bind to the browser, but we don't know it yet. Insert it to 
+	// black object, and later figure out what browser we belong to..
+	myClientHandler->setClient(CefRefPtr< CefBrowser >(), ofx); 
 
 	CefWindowInfo info;
 	info.width = ofx->getWidth();
@@ -103,7 +106,6 @@ CefRefPtr< CefBrowser > ClientAppCreateBrowser(std::shared_ptr<ofxCEFBrowser> of
 	// Create the new child browser window using an offscreen window
 	auto browser =  CefBrowserHost::CreateBrowserSync(info, myClientHandler.get(), CefString(startResource), settings);
 	
-	myClientHandler->setClient(browser, ofx); 
 
 	return browser;
 }

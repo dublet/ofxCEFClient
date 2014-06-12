@@ -265,6 +265,15 @@ class ClientHandler : public CefClient,
 			if (clientIt != ofxClientBrowserMap.end()) {
 				return clientIt->second;
 			}
+			auto &unboundClientIt = ofxClientBrowserMap.find(CefRefPtr<CefBrowser>());
+			if (unboundClientIt != ofxClientBrowserMap.end()) {
+				auto unboundClient = unboundClientIt->second;
+				ofxClientBrowserMap.erase(CefRefPtr<CefBrowser>());
+				ofxClientBrowserMap.insert(make_pair(browser, unboundClient));
+				return unboundClient;
+			}
+			if (ofxClientBrowserMap.size() == 1)
+				return ofxClientBrowserMap.begin()->second;
 			assert(false);
 			return std::shared_ptr<ofxCEFBrowser>(); 	
 		}
