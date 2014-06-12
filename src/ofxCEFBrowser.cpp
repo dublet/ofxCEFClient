@@ -9,13 +9,13 @@ extern CefRefPtr<ClientHandler> myClientHandler;
 
 
 ofxCEFBrowser::ofxCEFBrowser() 
-: width(-1), height(-1), mPixels(NULL), mTexture(NULL) {
+: mWidth(-1), mHeight(-1), mPixels(NULL), mTexture(NULL) {
 }
 
 ofxCEFBrowser::ofxCEFBrowser(int width, int height, string js)
 : mPixels(NULL), mTexture(NULL), mJavascript(js) {
-	width = (width == -1) ? ofGetWidth() : width;
-	height = (height == -1) ? ofGetHeight() : height;
+	mWidth = (width == -1) ? ofGetWidth() : width;
+	mHeight = (height == -1) ? ofGetHeight() : height;
 }
 
 void ofxCEFBrowser::browseTo(std::string startupResource) {
@@ -56,21 +56,19 @@ void ofxCEFBrowser::loadedTexture(const void *buffer) {
 	if (mLoadIntoPixels) {
 		assert(mPixels);
 	
-		unsigned char *buffer = (unsigned char *)buffer;
-		mPixels->setFromPixels(buffer, width, height, 4);
+		mPixels->setFromPixels((unsigned char *)buffer, mWidth, mHeight, 4);
 	} else {
 		assert(mTexture);
 	
 		// Load data will allocate but somehow allocating with GL_BGRA results in a 
 		// all white texture.
 		if (!mTexture->isAllocated()) 
-			mTexture->allocate(width, height, GL_RGBA);
+			mTexture->allocate(mWidth, mHeight, GL_RGBA);
 		else {
-			assert(mTexture->getHeight() == height);
-			assert(mTexture->getWidth() == width);
+			assert(mTexture->getHeight() == mHeight);
+			assert(mTexture->getWidth() == mWidth);
 		}
-		unsigned char *buffer = (unsigned char *)buffer;
-		mTexture->loadData(buffer, width, height, GL_BGRA);
+		mTexture->loadData((unsigned char *)buffer, mWidth, mHeight, GL_BGRA);
 	}
 	mLoadedTexture = true;
 }

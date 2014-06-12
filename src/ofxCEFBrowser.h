@@ -55,8 +55,8 @@ public:
 
 	void loadedTexture(const void *);
 
-	int getWidth() { return width; }
-	int getHeight() { return height; }
+	int getWidth() { return mWidth; }
+	int getHeight() { return mHeight; }
 	
 	std::string &getJavascript() { return mJavascript; }
 
@@ -92,10 +92,8 @@ private:
 
 	bool _initialized; 
 
-
-	unsigned char *buffer; 
-	int width;
-	int height; 
+	int mWidth;
+	int mHeight; 
 
 	uint32_t lastClick; 
 	std::atomic<bool> mLoadedTexture; 
