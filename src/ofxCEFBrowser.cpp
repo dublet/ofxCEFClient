@@ -104,6 +104,16 @@ void ofxCEFBrowser::loadTex(ofTexture * texture) {
 	myClientHandler->DoClose(mBrowser);
 }
 
+
+void ofxCEFBrowser::scroll(int deltaX, int deltaY) {
+	if (!_browserHost)
+		return;
+	CefMouseEvent mouse_event;
+	mouse_event.x = 0;
+	mouse_event.y = 0;
+	_browserHost->SendMouseWheelEvent(mouse_event, deltaX, deltaY);
+}
+
 //--------------------------------------------------------------
 void ofxCEFBrowser::_mouseMoved(ofMouseEventArgs &e) {
 

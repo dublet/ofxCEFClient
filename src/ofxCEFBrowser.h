@@ -68,6 +68,8 @@ public:
 	void sendMessage(std::string name, CefRefPtr<CefListValue> message); 
 
 	void messageCallback(CefRefPtr<CefProcessMessage> message); 
+
+	void scroll(int deltaX, int deltaY);
 private:
 	ofxCEFBrowser(const ofxCEFBrowser &);
 	
