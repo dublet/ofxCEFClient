@@ -88,8 +88,8 @@ void ofxCEFBrowser::loadTex(ofPixels * texture) {
 	mPixels = texture;
 	mLoadIntoPixels = true;
 	mLoadedTexture = false;
-	auto t1 = time(NULL);
-	while ((mBrowser->IsLoading() || !mLoadedTexture || !mPixels->isAllocated()) && (difftime(time(NULL), t1) < 2)) {
+
+	while (mBrowser->IsLoading() || !mLoadedTexture || !mPixels->isAllocated()) {
 		CefDoMessageLoopWork();
 	}
 }
