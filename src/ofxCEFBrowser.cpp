@@ -88,8 +88,13 @@ void ofxCEFBrowser::loadTex(ofPixels * texture) {
 	mPixels = texture;
 	mLoadIntoPixels = true;
 	mLoadedTexture = false;
-
-	while (mBrowser->IsLoading() || !mLoadedTexture || !mPixels->isAllocated()) {
+	
+	auto t1 = std::chrono::system_clock::now();
+	while (!mLoadedTexture) {
+		
+		auto ms =  std::chrono::duration_cast<std::chrono::milliseconds>( std::chrono::system_clock::now() - t1 ).count();
+		if (ms > 30)
+			break;
 		CefDoMessageLoopWork();
 	}
 }
@@ -99,7 +104,7 @@ void ofxCEFBrowser::loadTex(ofTexture * texture) {
 	mLoadIntoPixels = false;
 	mLoadedTexture = false;
 
-	while (mBrowser->IsLoading() || !mLoadedTexture || !mTexture->isAllocated()) {
+	while (!mLoadedTexture) {
 		CefDoMessageLoopWork();
 	}
 }
