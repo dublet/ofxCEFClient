@@ -126,11 +126,9 @@ void ofxCEFBrowser::_mouseMoved(ofMouseEventArgs &e) {
 	mouse_event.y = y;
 
 	_browserHost->SendMouseMoveEvent(mouse_event, false); 
-
 }
 
 void ofxCEFBrowser::_mousePressed(ofMouseEventArgs &e) {
-
 	int x = e.x;
 	int y = e.y;
 	int button = e.button;
@@ -153,12 +151,10 @@ void ofxCEFBrowser::_mousePressed(ofMouseEventArgs &e) {
     lastClick = currClick;
 
 	// Mouse Down
-	_browserHost->SendMouseClickEvent(mouse_event, btnType, false, clickCount); 
-															
+	_browserHost->SendMouseClickEvent(mouse_event, btnType, false, clickCount); 													
 }
 
 void ofxCEFBrowser::_mouseDragged(ofMouseEventArgs &e) {
-
 	int x = e.x;
 	int y = e.y;
 	int button = e.button;
@@ -168,11 +164,9 @@ void ofxCEFBrowser::_mouseDragged(ofMouseEventArgs &e) {
 	mouse_event.y = y;
 
 	_browserHost->SendMouseMoveEvent(mouse_event, false); 
-
 }
 
 void ofxCEFBrowser::_mouseReleased(ofMouseEventArgs &e) {
-
 	int x = e.x;
 	int y = e.y;
 	int button = e.button;
@@ -185,11 +179,9 @@ void ofxCEFBrowser::_mouseReleased(ofMouseEventArgs &e) {
 
 	// Mouse Up
 	_browserHost->SendMouseClickEvent(mouse_event, btnType, true, 1); 
-
 }
 
 void ofxCEFBrowser::_keyPressed(ofKeyEventArgs &e) {
-
 	int key = e.key;
 
 	CefKeyEvent event;
@@ -198,11 +190,9 @@ void ofxCEFBrowser::_keyPressed(ofKeyEventArgs &e) {
 	event.type = KEYEVENT_CHAR;
 
 	_browserHost->SendKeyEvent(event);
-
 }
 
 void ofxCEFBrowser::_keyReleased(ofKeyEventArgs &e) {
-
 	int key = e.key;	
 
 	CefKeyEvent event;
@@ -213,16 +203,13 @@ void ofxCEFBrowser::_keyReleased(ofKeyEventArgs &e) {
 	event.type = KEYEVENT_KEYUP;
 	 
 	_browserHost->SendKeyEvent(event);
-
 }
 
 void ofxCEFBrowser::_windowResized(ofResizeEventArgs &e) {
-
 	// BUGBUG: Should trigger a render to the browser
 	// _cef_buffer.clear();
 	// _cef_buffer.allocate(e.width, e.height, GL_RGBA); 
 	//_browserHost->WasResized();
-
 }
 
 void ofxCEFBrowser::processEvent() {
@@ -239,7 +226,9 @@ void ofxCEFBrowser::sendMessage(std::string name, CefRefPtr <CefListValue> messa
 }
 
 void ofxCEFBrowser::messageCallback(CefRefPtr<CefProcessMessage> message) {
-
 	jsEventQueue.post(message); 
+}
 
+bool ofxCEFBrowser::isLoading() {
+	return mBrowser->IsLoading();
 }
