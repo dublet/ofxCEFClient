@@ -29,8 +29,10 @@ void ofxCEFBrowser::browseTo(std::string startupResource) {
 	} else {
 		ofLogNotice() << "Using URL: \n " << startupResource << std::endl; 
 	}
-
-	mBrowser = ClientAppCreateBrowser(shared_from_this(), startupResource); 
+	if (mBrowser)
+		mBrowser->GetMainFrame()->LoadURL(startupResource);
+	else
+		mBrowser = ClientAppCreateBrowser(shared_from_this(), startupResource); 
 	assert(mBrowser);
 	_browserHost = mBrowser->GetHost();
 }
