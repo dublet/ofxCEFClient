@@ -70,6 +70,8 @@ public:
 	void messageCallback(CefRefPtr<CefProcessMessage> message); 
 
 	void scroll(int deltaX, int deltaY);
+
+	bool isLoading();
 private:
 	ofxCEFBrowser(const ofxCEFBrowser &);
 	

@@ -226,3 +226,7 @@ void ofxCEFBrowser::sendMessage(std::string name, CefRefPtr <CefListValue> messa
 void ofxCEFBrowser::messageCallback(CefRefPtr<CefProcessMessage> message) {
 	jsEventQueue.post(message); 
 }
+
+bool ofxCEFBrowser::isLoading() {
+	return mBrowser->IsLoading();
+}
