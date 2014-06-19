@@ -119,6 +119,27 @@ void ofxCEFBrowser::scroll(int deltaX, int deltaY) {
 	_browserHost->SendMouseWheelEvent(mouse_event, deltaX, deltaY);
 }
 
+void ofxCEFBrowser::click(int x, int y) {
+	if (!_browserHost)
+		return;
+	CefMouseEvent mouse_event;
+	mouse_event.x = x;
+	mouse_event.y = y;
+	_browserHost->SendMouseClickEvent(mouse_event, MBT_LEFT, false, 1); 
+	_browserHost->SendMouseClickEvent(mouse_event, MBT_LEFT, true, 1); 
+}
+
+void ofxCEFBrowser::move(int x, int y) {
+	if (!_browserHost)
+		return;
+	CefMouseEvent mouse_event;
+	mouse_event.x = x;
+	mouse_event.y = y;
+
+	_browserHost->SendMouseMoveEvent(mouse_event, false); 
+}
+
+
 //--------------------------------------------------------------
 void ofxCEFBrowser::_mouseMoved(ofMouseEventArgs &e) {
 

@@ -70,6 +70,8 @@ public:
 	void messageCallback(CefRefPtr<CefProcessMessage> message); 
 
 	void scroll(int deltaX, int deltaY);
+	void click(int x, int y);
+	void move(int x, int y);
 
 	bool isLoading();
 private:
