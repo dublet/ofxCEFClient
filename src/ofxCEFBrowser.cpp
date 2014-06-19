@@ -23,11 +23,10 @@ void ofxCEFBrowser::browseTo(std::string startupResource) {
 	if (startupResource.empty() || startupResource == "") {
 		startupResource = ofFilePath::getAbsolutePath("tile-small.html", true);
 	}
-	if (startupResource.compare(0, 7, "http://") != 0) {
-		startupResource = "file:\\\\" + startupResource;
-		ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
-	} else {
+	if (startupResource.compare(0, 7, "http://") == 0 || startupResource.compare(0, 6, "about:") == 0) {
 		ofLogNotice() << "Using URL: \n " << startupResource << std::endl; 
+	} else {startupResource = "file:\\\\" + startupResource;
+		ofLogNotice() << "Using UI HTML Document: \n " << startupResource << std::endl; 
 	}
 	if (mBrowser)
 		mBrowser->GetMainFrame()->LoadURL(startupResource);
