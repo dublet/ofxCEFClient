@@ -39,6 +39,9 @@ public:
 
 		CefString optimizedUI(L"-touch-optimized-ui=disabled");
 		command_line->AppendSwitch(optimizedUI);
+		command_line->AppendSwitch("allow-insecure-websocket-from-https-origin");
+		command_line->AppendSwitch("disable-web-security");
+		command_line->AppendSwitch("mute-audio");
 
 		// CefString touchSimulated(L"-simulate-touch-screen-with-mouse");
 		// command_line->AppendSwitch(touchSimulated);
