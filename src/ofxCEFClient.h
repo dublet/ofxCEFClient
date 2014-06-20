@@ -22,6 +22,7 @@ public:
 	static ofxCEFClient &getInstance();
 	
 	void init();
+	void shutdown();
 
 	void processEvent();
 

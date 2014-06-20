@@ -47,10 +47,17 @@ std::shared_ptr<ofxCEFBrowser> ofxCEFClient::createBrowser(int width, int height
 
 void ofxCEFClient::_exit(ofEventArgs &e) {
 
-	myClientHandler->CloseAllBrowsers(true);
-
+	shutdown();
 	// Most clean to use CefShutdown(), but seems to throw some nasty hard-to-debug error for the time being. 
 	// I mean, we're closing the application anyway... 
 	// CefShutdown();
 
+}
+
+
+void ofxCEFClient::shutdown() {
+	myClientHandler->CloseAllBrowsers(true);
+	for (int i = 0; i < 1000; i++)
+		processEvent();
+	CefShutdown();
 }
