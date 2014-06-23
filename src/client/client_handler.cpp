@@ -588,8 +588,14 @@ void ClientHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type
 		ofLogNotice("ClientHandler", "Width and height mismatch between rectangle and draw region");
 	}
 
-	if (((const unsigned char *)buffer)[3] == 0xff) 
-	// Nerp -- fix this 
+	bool allClear = true;
+	const char *zero = "\0\0\0\0""\0\0\0\0""\0\0\0\0""\0\0\0\0";
+	const char * start = (const char *)buffer, *end = start + width * height;
+	for (; start < end && allClear; start += 16)
+		if (memcmp(start, zero, 16) != 0)
+			allClear = false;
+	
+	if (!allClear)
 	client->loadedTexture(buffer); 
 
 }
