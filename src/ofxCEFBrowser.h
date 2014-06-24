@@ -50,8 +50,8 @@ public:
 
 	void browseTo(std::string url);
 
-	void loadTex(ofPixels *); 
-	void loadTex(ofTexture *); 
+	void loadTex(std::shared_ptr<ofPixels>); 
+	void loadTex(std::shared_ptr<ofTexture>); 
 
 	void loadedTexture(const void *);
 
@@ -93,8 +93,8 @@ private:
 	CefRefPtr<CefBrowserHost> _browserHost; 
 
 	bool mLoadIntoPixels;
-	ofTexture *mTexture; 
-	ofPixels *mPixels;
+	std::shared_ptr<ofTexture> mTexture; 
+	std::shared_ptr<ofPixels> mPixels;
 
 	bool _initialized; 
 

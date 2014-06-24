@@ -79,7 +79,7 @@ void ofxCEFBrowser::loadedTexture(const void *buffer) {
 }
 
 
-void ofxCEFBrowser::loadTex(ofPixels * texture) {
+void ofxCEFBrowser::loadTex(std::shared_ptr<ofPixels> texture) {
 	assert(mBrowser);
 	if (!mBrowser)
 		return;
@@ -98,7 +98,7 @@ void ofxCEFBrowser::loadTex(ofPixels * texture) {
 	}
 }
 
-void ofxCEFBrowser::loadTex(ofTexture * texture) {
+void ofxCEFBrowser::loadTex(std::shared_ptr<ofTexture> texture) {
 	mTexture = texture;
 	mLoadIntoPixels = false;
 	mLoadedTexture = false;
