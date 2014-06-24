@@ -227,6 +227,8 @@ void CEF_CALLBACK render_handler_on_paint(struct _cef_render_handler_t* self,
   DCHECK(buffer);
   if (!buffer)
     return;
+  if (type == PET_POPUP)
+	  return;
 
   // Translate param: dirtyRects; type: simple_vec_byref_const
   std::vector<CefRect > dirtyRectsList;
