@@ -64,6 +64,8 @@ public:
 
 	void close();
 
+	void executeJavascript(std::string &js);
+	std::string getUrl();
 	
 	void sendMessage(std::string name, CefRefPtr<CefListValue> message); 
 

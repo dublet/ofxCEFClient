@@ -257,3 +257,11 @@ void ofxCEFBrowser::messageCallback(CefRefPtr<CefProcessMessage> message) {
 bool ofxCEFBrowser::isLoading() {
 	return mBrowser->IsLoading();
 }
+
+void ofxCEFBrowser::executeJavascript(std::string &js) {
+	mBrowser->GetMainFrame()->ExecuteJavaScript(js, "", 0);
+}
+
+std::string ofxCEFBrowser::getUrl() {
+	return mBrowser->GetMainFrame()->GetURL();
+}
