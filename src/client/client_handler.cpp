@@ -312,7 +312,7 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 		// Cancel popups in off-screen rendering mode.
 		return true;
 	}
-	return false;
+	return true;
 }
 
 void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)

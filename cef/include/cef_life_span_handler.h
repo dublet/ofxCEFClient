@@ -73,7 +73,7 @@ class CefLifeSpanHandler : public virtual CefBase {
                              CefRefPtr<CefClient>& client,
                              CefBrowserSettings& settings,
                              bool* no_javascript_access) {
-    return false;
+    return true;
   }
 
   ///
