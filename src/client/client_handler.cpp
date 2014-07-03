@@ -390,7 +390,7 @@ void ClientHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 
 	if (--m_BrowserCount == 0) {
 		// All browser windows have closed. Quit the application message loop.
-		AppQuitMessageLoop();
+		//AppQuitMessageLoop();
 	}
 }
 
