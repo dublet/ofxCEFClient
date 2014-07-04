@@ -252,35 +252,66 @@ class ClientHandler : public CefClient,
 		                     int width,
 		                     int height) OVERRIDE;
 
+		std::shared_ptr<ofxCEFBrowser> mBindToThisClient;
+
+		void setBindToThisClient(std::shared_ptr<ofxCEFBrowser> client) {
+			mBindToThisClient = client;
+		}
+
+		void bindToThisClient(CefRefPtr<CefBrowser> browser) {
+			assert(mBindToThisClient);
+			auto &it = ofxClientBrowserMap.find(mBindToThisClient);
+			if (it != ofxClientBrowserMap.end()) {
+				it->second.insert(browser);
+			} else {
+				set<CefRefPtr<CefBrowser>> browserset;
+				browserset.insert(browser);
+				ofxClientBrowserMap.insert(make_pair(mBindToThisClient, browserset));
+			}
+		}
+
 		virtual void ForwardMessageToOfx(CefRefPtr<CefBrowser> browser, CefRefPtr<CefProcessMessage> message){
 			auto client = getClient(browser);
 			if (client)
 				client->messageCallback(message); 
 		}
 
-		virtual void setClient(CefRefPtr<CefBrowser> browser, std::shared_ptr<ofxCEFBrowser> client) {
-			ofxClientBrowserMap.insert(make_pair(browser, client));
+		void unbindClient(CefRefPtr<CefBrowser> browser) {
+			for (auto ofxClient : ofxClientBrowserMap) {
+				ofxClient.second.erase(browser);
+			}
 		}
 
 		std::shared_ptr<ofxCEFBrowser> getClient(CefRefPtr<CefBrowser> browser) {
-			auto clientIt = ofxClientBrowserMap.find(browser);
-			if (clientIt != ofxClientBrowserMap.end()) {
-				return clientIt->second;
+			for (auto ofxClient : ofxClientBrowserMap) {
+				for (auto cefbrowser : ofxClient.second) {
+					if (cefbrowser == browser || cefbrowser->IsSame(browser) /*|| browser->GetMainFrame() == cefbrowser->GetMainFrame()*/
+						|| cefbrowser->GetIdentifier() == browser->GetIdentifier()) {
+						return ofxClient.first;
+					}
+				}
 			}
-			auto &unboundClientIt = ofxClientBrowserMap.find(CefRefPtr<CefBrowser>());
-			if (unboundClientIt != ofxClientBrowserMap.end()) {
-				auto unboundClient = unboundClientIt->second;
-				ofxClientBrowserMap.erase(CefRefPtr<CefBrowser>());
-				ofxClientBrowserMap.insert(make_pair(browser, unboundClient));
-				return unboundClient;
-			}
-			if (ofxClientBrowserMap.size() == 1)
-				return ofxClientBrowserMap.begin()->second;
-			assert(false);
+			
+
+			//if (ofxClientBrowserMap.size() == 1)
+			//	return ofxClientBrowserMap.begin()->second;
+			//assert(false);
+
+			
 			return std::shared_ptr<ofxCEFBrowser>(); 	
 		}
 
-		std::map<CefRefPtr<CefBrowser>, std::shared_ptr<ofxCEFBrowser>> ofxClientBrowserMap; 
+		void closeClient(std::shared_ptr<ofxCEFBrowser> browser) {
+			auto it = ofxClientBrowserMap.find(browser);
+			if (it != ofxClientBrowserMap.end()) {
+				for (auto &cefbrowser : it->second) {
+					DoClose(cefbrowser);
+				}
+				ofxClientBrowserMap.erase(it);
+			}
+		}
+
+		std::map<std::shared_ptr<ofxCEFBrowser>, std::set<CefRefPtr<CefBrowser>>> ofxClientBrowserMap; 
 
 		virtual void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor) OVERRIDE;
 

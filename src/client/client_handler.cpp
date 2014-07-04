@@ -328,6 +328,7 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 		// Add to the list of popup browsers.
 		m_PopupBrowsers.push_back(browser);
 	}
+	bindToThisClient(browser);
 
 	m_BrowserCount++;
 
@@ -377,6 +378,8 @@ void ClientHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 			}
 		}
 	}
+
+	unbindClient(browser);
 
 	if (--m_BrowserCount == 0) {
 		// All browser windows have closed. Quit the application message loop.
@@ -616,9 +619,11 @@ void ClientHandler::CloseAllBrowsers(bool force_close)
 			(*it)->GetHost()->CloseBrowser(force_close);
 	}
 
-	if (m_Browser.get()) {
-		// Request that the main browser close.
-		m_Browser->GetHost()->CloseBrowser(force_close);
+	for (auto it : ofxClientBrowserMap) {
+		for (auto &cefbrowser : it.second) {
+			DoClose(cefbrowser);
+		}
+		ofxClientBrowserMap.erase(it.first);
 	}
 }
 

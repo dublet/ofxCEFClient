@@ -37,6 +37,7 @@ void ofxCEFBrowser::browseTo(std::string startupResource) {
 }
 
 ofxCEFBrowser::~ofxCEFBrowser() {
+	close();
 }
 
 
@@ -54,7 +55,13 @@ void ofxCEFBrowser::enableEvents() {
 }
 
 void ofxCEFBrowser::close() {
-	myClientHandler->DoClose(mBrowser);
+	if (mBrowser) {
+		mBrowser->StopLoad();
+		myClientHandler->closeClient(shared_from_this());
+		mBrowser = CefRefPtr<CefBrowser>();
+		
+	processEvent();
+	}
 }
 
 void ofxCEFBrowser::loadedTexture(const void *buffer) {
