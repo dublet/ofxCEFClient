@@ -513,6 +513,8 @@ void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser,
 bool ClientHandler::GetRootScreenRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
 	auto client = getClient(browser);
+	if (!client)
+		return false;
 	rect = CefRect(0, 0, client->getWidth(), client->getHeight());
 	return true;
 }
@@ -520,6 +522,8 @@ bool ClientHandler::GetRootScreenRect(CefRefPtr<CefBrowser> browser, CefRect &re
 bool ClientHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
 	auto client = getClient(browser);
+	if (!client)
+		return false;
 	RECT clientRect;
 	rect.x = rect.y = 0;
 	rect.width = client->getWidth();
@@ -565,6 +569,7 @@ void ClientHandler::OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect &re
 void ClientHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
 	auto client = getClient(browser);
+	assert(client);
 	if (width != client->getWidth() || height != client->getHeight()) {
 		ofLogNotice("ClientHandler", "Width and height mismatch between rectangle and draw region");
 	}
