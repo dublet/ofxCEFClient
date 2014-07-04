@@ -43,15 +43,6 @@ LRESULT CALLBACK MessageWndProc(HWND, UINT, WPARAM, LPARAM);
 // The global ClientHandler reference (client.cpp)
 extern CefRefPtr<ClientHandler> myClientHandler;
 
-class MainBrowserProvider {
-	virtual CefRefPtr<CefBrowser> GetBrowser() {
-		if (myClientHandler.get())
-			return myClientHandler->GetBrowser();
-
-		return NULL;
-	}
-} g_main_browser_provider;
-
 
 static CefRefPtr<ClientApp> sClientApp;
 // http://stackoverflow.com/questions/15462064/hinstance-in-createwindow
