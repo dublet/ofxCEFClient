@@ -80,8 +80,10 @@ CefRefPtr< CefBrowser > ClientAppCreateBrowser(std::shared_ptr<ofxCEFBrowser> of
 
 	// Create the single static handler class instance
 	HWND hWnd = WindowFromDC(wglGetCurrentDC());
-	myClientHandler = new ClientHandler();
-	sClientApp->setCurrentClientHandler(myClientHandler);
+	if (myClientHandler == NULL) {
+		myClientHandler = new ClientHandler();
+		sClientApp->setCurrentClientHandler(myClientHandler);
+	}
 	// We need to bind to the browser, but we don't know it yet. Insert it to 
 	// black object, and later figure out what browser we belong to..
 	myClientHandler->setClient(CefRefPtr< CefBrowser >(), ofx); 
