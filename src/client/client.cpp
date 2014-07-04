@@ -22,12 +22,6 @@
 CefRefPtr<ClientHandler> myClientHandler;
 CefRefPtr<CefCommandLine> g_command_line;
 
-CefRefPtr<CefBrowser> AppGetBrowser() {
-  if (!myClientHandler.get())
-    return NULL;
-  return myClientHandler->GetBrowser();
-}
-
 void AppInitCommandLine(int argc, const char* const* argv) {
   g_command_line = CefCommandLine::CreateCommandLine();
 #if defined(OS_WIN)
