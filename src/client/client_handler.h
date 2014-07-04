@@ -282,25 +282,8 @@ class ClientHandler : public CefClient,
 
 		virtual void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor) OVERRIDE;
 
-		CefRefPtr<CefBrowser> GetBrowser()
-		{
-			return m_Browser;
-		}
-		int GetBrowserId()
-		{
-			return m_BrowserId;
-		}
-
 		// Request that all existing browser windows close.
 		void CloseAllBrowsers(bool force_close);
-
-		// Returns true if the main browser window is currently closing. Used in
-		// combination with DoClose() and the OS close notification to properly handle
-		// 'onbeforeunload' JavaScript events during window close.
-		bool IsClosing()
-		{
-			return m_bIsClosing;
-		}
 
 		std::string GetLogFile();
 
@@ -348,18 +331,9 @@ class ClientHandler : public CefClient,
 		// use the default temp directory.
 		std::string GetDownloadPath(const std::string &file_name);
 
-		// The child browser window
-		CefRefPtr<CefBrowser> m_Browser;
-
 		// List of any popup browser windows. Only accessed on the CEF UI thread.
 		typedef std::list<CefRefPtr<CefBrowser> > BrowserList;
 		BrowserList m_PopupBrowsers;
-
-		// The child browser id
-		int m_BrowserId;
-
-		// True if the main browser window is currently closing.
-		bool m_bIsClosing;
 
 		HWND ofxWindowHandle; 
 

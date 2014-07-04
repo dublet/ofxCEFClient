@@ -81,8 +81,7 @@ namespace {
 int ClientHandler::m_BrowserCount = 0;
 
 ClientHandler::ClientHandler()
-	: m_BrowserId(0),
-	  m_bIsClosing(false),
+	: 
 	  m_bFocusOnEditableField(false)
 {
 
@@ -325,11 +324,7 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 		browser->GetHost()->SetMouseCursorChangeDisabled(true);
 
 	AutoLock lock_scope(this);
-	if (!m_Browser.get())   {
-		// We need to keep the main child window, but not popup windows
-		m_Browser = browser;
-		m_BrowserId = browser->GetIdentifier();
-	} else if (browser->IsPopup()) {
+	if (browser->IsPopup()) {
 		// Add to the list of popup browsers.
 		m_PopupBrowsers.push_back(browser);
 	}
@@ -353,11 +348,9 @@ bool ClientHandler::DoClose(CefRefPtr<CefBrowser> browser)
 	// Closing the main window requires special handling. See the DoClose()
 	// documentation in the CEF header for a detailed destription of this
 	// process.
-	if (m_BrowserId == browser->GetIdentifier()) {
-		browser->GetHost()->CloseBrowser(false);
-		// Set a flag to indicate that the window close should be allowed.
-		m_bIsClosing = true;
-	}
+	
+	browser->GetHost()->CloseBrowser(false);
+
 
 	// Allow the close. For windowed browsers this will result in the OS close
 	// event being sent.
@@ -368,10 +361,7 @@ void ClientHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 {
 	REQUIRE_UI_THREAD();
 
-	if (m_BrowserId == browser->GetIdentifier()) {
-		// Free the browser pointer so that the browser can be destroyed
-		m_Browser = NULL;
-	} else if (browser->IsPopup()) {
+	if (browser->IsPopup()) {
 		// Remove the record for DevTools popup windows.
 		std::set<std::string>::iterator it =
 		    m_OpenDevToolsURLs.find(browser->GetMainFrame()->GetURL());
@@ -399,10 +389,6 @@ void ClientHandler::OnLoadStart(CefRefPtr<CefBrowser> browser,
 {
 	REQUIRE_UI_THREAD();
 
-	if (m_BrowserId == browser->GetIdentifier() && frame->IsMain()) {
-		// We've just started loading a page
-		SetLoading(true);
-	}
 }
 
 void ClientHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser,
@@ -410,11 +396,6 @@ void ClientHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser,
                               int httpStatusCode)
 {
 	REQUIRE_UI_THREAD();
-
-	if (m_BrowserId == browser->GetIdentifier() && frame->IsMain()) {
-		// We've just finished loading a page
-		SetLoading(false);
-	}
 
 	
 }
@@ -744,7 +725,7 @@ void ClientHandler::OnAddressChange(CefRefPtr<CefBrowser> browser,
 {
 	REQUIRE_UI_THREAD();
 
-	if (m_BrowserId == browser->GetIdentifier() && frame->IsMain()) {
+	if (frame->IsMain()) {
 		// Set the edit window text
 	}
 }
@@ -756,7 +737,7 @@ void ClientHandler::OnTitleChange(CefRefPtr<CefBrowser> browser,
 
 	// Set the frame window title bar
 	CefWindowHandle hwnd = browser->GetHost()->GetWindowHandle();
-	if (m_BrowserId == browser->GetIdentifier()) {
+	if (1) {
 		// The frame window will be the parent of the browser window
 	}
 	// SetWindowText(hwnd, std::wstring(title).c_str());
