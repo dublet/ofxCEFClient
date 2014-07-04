@@ -165,12 +165,12 @@ namespace {
 						handled = true;
 					}
 				} else if (name == "onLoad") {
-					auto currentBrowser = CefV8Context::GetCurrentContext()->GetBrowser();
+					auto currentBrowser = CefV8Context::GetCurrentContext()->GetFrame()->GetBrowser();
 					auto currentClientHandler = client_app_->getCurrentClientHandler();
-					if (currentClientHandler) {
-						auto client = currentClientHandler->getClient( currentBrowser);
-						if (client) {
-							std::string &javascript = client->getJavascript();
+					if (currentClientHandler && currentBrowser) {
+						shared_ptr<ofxCEFBrowser> ofxBrowser = currentClientHandler->getClient(currentBrowser);
+						if (ofxBrowser) {
+							std::string &javascript = ofxBrowser->getJavascript();
 							auto frame  = currentBrowser->GetMainFrame();
 							frame->ExecuteJavaScript(javascript.c_str(), frame->GetURL(), 0);
 						}
