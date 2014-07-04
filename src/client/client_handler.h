@@ -253,7 +253,9 @@ class ClientHandler : public CefClient,
 		                     int height) OVERRIDE;
 
 		virtual void ForwardMessageToOfx(CefRefPtr<CefBrowser> browser, CefRefPtr<CefProcessMessage> message){
-			getClient(browser)->messageCallback(message); 
+			auto client = getClient(browser);
+			if (client)
+				client->messageCallback(message); 
 		}
 
 		virtual void setClient(CefRefPtr<CefBrowser> browser, std::shared_ptr<ofxCEFBrowser> client) {
