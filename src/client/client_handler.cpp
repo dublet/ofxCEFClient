@@ -79,11 +79,13 @@ namespace {
 }  // namespace
 
 int ClientHandler::m_BrowserCount = 0;
+extern CefRefPtr<ClientApp> sClientApp;
 
 ClientHandler::ClientHandler()
 	: 
 	  m_bFocusOnEditableField(false)
 {
+	sClientApp->addClientHandler(CefRefPtr<ClientHandler>(this));
 
 	//ofLogNotice() << (__FUNCTION__) << std::endl;
 
@@ -112,6 +114,9 @@ ClientHandler::ClientHandler()
 
 ClientHandler::~ClientHandler()
 {
+	
+	sClientApp->removeClientHandler(CefRefPtr<ClientHandler>(this));
+
 }
 
 bool ClientHandler::OnProcessMessageReceived(

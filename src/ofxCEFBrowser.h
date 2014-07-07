@@ -8,6 +8,8 @@
 
 #include "client\client.h"
 
+class ClientHandler;
+
 
 class message_queue {
 
@@ -76,6 +78,9 @@ public:
 	void move(int x, int y);
 
 	bool isLoading();
+
+	CefRefPtr<ClientHandler> getClientHandler();
+	
 private:
 	ofxCEFBrowser(const ofxCEFBrowser &);
 	
@@ -106,6 +111,7 @@ private:
 	uint32_t lastClick; 
 	std::atomic<bool> mLoadedTexture; 
 	CefRefPtr<CefBrowser> mBrowser;
+	CefRefPtr<ClientHandler> mClientHandler;
 
 	string mJavascript;
 	

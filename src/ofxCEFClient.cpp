@@ -5,8 +5,6 @@
 //#include "testApp.h"
 #include <windows.h>
 
-// The global ClientHandler reference (defined in client.cpp)
-extern CefRefPtr<ClientHandler> myClientHandler;
 
 ofxCEFClient *ofxCEFClient::mInstance = NULL;
 
@@ -56,7 +54,7 @@ void ofxCEFClient::_exit(ofEventArgs &e) {
 
 
 void ofxCEFClient::shutdown() {
-	myClientHandler->CloseAllBrowsers(true);
+	//myClientHandler->CloseAllBrowsers(true);
 	for (int i = 0; i < 1000; i++)
 		processEvent();
 	CefShutdown();

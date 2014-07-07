@@ -4,21 +4,20 @@
 
 #include "client_handler.h"
 
-// The global ClientHandler reference (defined in client.cpp)
-extern CefRefPtr<ClientHandler> myClientHandler;
-
-
 ofxCEFBrowser::ofxCEFBrowser() 
-: mWidth(-1), mHeight(-1), mPixels(NULL), mTexture(NULL) {
+: mWidth(-1), mHeight(-1), mPixels(NULL), mTexture(NULL), mClientHandler(new ClientHandler()) {
+	
 }
 
 ofxCEFBrowser::ofxCEFBrowser(int width, int height, string js)
-: mPixels(NULL), mTexture(NULL), mJavascript(js) {
+: mPixels(NULL), mTexture(NULL), mJavascript(js), mClientHandler(new ClientHandler()) {
 	mWidth = (width == -1) ? ofGetWidth() : width;
 	mHeight = (height == -1) ? ofGetHeight() : height;
 }
 
 void ofxCEFBrowser::browseTo(std::string startupResource) {
+	mClientHandler->setBindToThisClient(shared_from_this());
+
 	//string startResource = "file:\\\\" + pathUtil.getCurrentWorkingDirectory() + "interface\\index.html"; 
 	if (startupResource.empty() || startupResource == "") {
 		startupResource = ofFilePath::getAbsolutePath("tile-small.html", true);
@@ -37,6 +36,7 @@ void ofxCEFBrowser::browseTo(std::string startupResource) {
 }
 
 ofxCEFBrowser::~ofxCEFBrowser() {
+	mClientHandler->setBindToThisClient(shared_ptr<ofxCEFBrowser>());
 	close();
 }
 
@@ -57,7 +57,7 @@ void ofxCEFBrowser::enableEvents() {
 void ofxCEFBrowser::close() {
 	if (mBrowser) {
 		mBrowser->StopLoad();
-		myClientHandler->closeClient(shared_from_this());
+		mClientHandler->closeClient(shared_from_this());
 		mBrowser = CefRefPtr<CefBrowser>();
 		
 	processEvent();
@@ -271,4 +271,8 @@ void ofxCEFBrowser::executeJavascript(std::string &js) {
 
 std::string ofxCEFBrowser::getUrl() {
 	return mBrowser->GetMainFrame()->GetURL();
+}
+
+CefRefPtr<ClientHandler> ofxCEFBrowser::getClientHandler() {
+	return mClientHandler;
 }

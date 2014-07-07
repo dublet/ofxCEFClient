@@ -151,9 +151,11 @@ public:
 	bool RemoveMessageCallback(const std::string& message_name,
 		int browser_id);
 
+	void addClientHandler(CefRefPtr<ClientHandler> clientHandler);
+	void removeClientHandler(CefRefPtr<ClientHandler> clientHandler);
+	CefRefPtr<ClientHandler> getClientHandlerForBrowser(CefRefPtr<CefBrowser>);
 	
-	ClientHandler * getCurrentClientHandler() { return current_client_handler_; }
-	void setCurrentClientHandler(ClientHandler *myClientHandler) { current_client_handler_ = myClientHandler; }
+	std::shared_ptr<ofxCEFBrowser> getOfxBrowserForBrowser(CefRefPtr<CefBrowser>);
 
 private:
 	
@@ -246,7 +248,8 @@ private:
 
 	// Schemes that will be registered with the global cookie manager.
 	std::vector<CefString> cookieable_schemes_;
-	ClientHandler *current_client_handler_;
+
+	std::vector<CefRefPtr<ClientHandler>> client_handlers_;
 
 	IMPLEMENT_REFCOUNTING(ClientApp);
 

@@ -40,11 +40,7 @@ HWND hMessageWnd = NULL;
 HWND CreateMessageWindow(HINSTANCE hInstance);
 LRESULT CALLBACK MessageWndProc(HWND, UINT, WPARAM, LPARAM);
 
-// The global ClientHandler reference (client.cpp)
-extern CefRefPtr<ClientHandler> myClientHandler;
-
-
-static CefRefPtr<ClientApp> sClientApp;
+CefRefPtr<ClientApp> sClientApp;
 // http://stackoverflow.com/questions/15462064/hinstance-in-createwindow
 
 void ClientAppInit() {
@@ -80,14 +76,7 @@ CefRefPtr< CefBrowser > ClientAppCreateBrowser(std::shared_ptr<ofxCEFBrowser> of
 
 	// Create the single static handler class instance
 	HWND hWnd = WindowFromDC(wglGetCurrentDC());
-	if (myClientHandler == NULL) {
-		myClientHandler = new ClientHandler();
-		sClientApp->setCurrentClientHandler(myClientHandler);
-	}
-	// We need to bind to the browser, but we don't know it yet. Insert it to 
-	// black object, and later figure out what browser we belong to..
-	myClientHandler->setBindToThisClient(ofx);
-
+	
 	CefWindowInfo info;
 	info.width = ofx->getWidth();
 	info.height = ofx->getHeight();
@@ -97,8 +86,7 @@ CefRefPtr< CefBrowser > ClientAppCreateBrowser(std::shared_ptr<ofxCEFBrowser> of
 	//info.SetAsPopup(hWnd, "hehe"); 
 
 	// Create the new child browser window using an offscreen window
-	auto browser =  CefBrowserHost::CreateBrowserSync(info, myClientHandler.get(), CefString(startResource), settings);
-	myClientHandler->setBindToThisClient(shared_ptr<ofxCEFBrowser>());
+	auto browser =  CefBrowserHost::CreateBrowserSync(info, ofx->getClientHandler().get(), CefString(startResource), settings);
 
 	return browser;
 }

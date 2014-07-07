@@ -19,7 +19,6 @@
 #include "util.h"
 #include "string_util.h"
 
-CefRefPtr<ClientHandler> myClientHandler;
 CefRefPtr<CefCommandLine> g_command_line;
 
 void AppInitCommandLine(int argc, const char* const* argv) {

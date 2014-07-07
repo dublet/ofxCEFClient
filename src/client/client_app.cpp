@@ -166,9 +166,8 @@ namespace {
 					}
 				} else if (name == "onLoad") {
 					auto currentBrowser = CefV8Context::GetCurrentContext()->GetFrame()->GetBrowser();
-					auto currentClientHandler = client_app_->getCurrentClientHandler();
-					if (currentClientHandler && currentBrowser) {
-						shared_ptr<ofxCEFBrowser> ofxBrowser = currentClientHandler->getClient(currentBrowser);
+					if (currentBrowser) {
+						shared_ptr<ofxCEFBrowser> ofxBrowser = client_app_->getOfxBrowserForBrowser(currentBrowser);
 						if (ofxBrowser) {
 							std::string &javascript = ofxBrowser->getJavascript();
 							auto frame  = currentBrowser->GetMainFrame();
@@ -474,3 +473,34 @@ bool ClientApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProce
 
 }
 
+void ClientApp::addClientHandler(CefRefPtr<ClientHandler> clientHandler) {
+		client_handlers_.push_back(clientHandler);
+	}
+
+void ClientApp::removeClientHandler(CefRefPtr<ClientHandler> clientHandler) {
+	auto it = client_handlers_.begin();
+	while (it != client_handlers_.end())
+		if (*it == clientHandler)  {
+			client_handlers_.erase(it);
+			break;
+		}
+}
+
+CefRefPtr<ClientHandler> ClientApp::getClientHandlerForBrowser(CefRefPtr<CefBrowser> browser) {
+	for (auto clientHandler : client_handlers_) {
+		auto ofxBrowser = clientHandler->getClient(browser);
+		if (ofxBrowser)
+			return clientHandler;
+	}
+	return CefRefPtr<ClientHandler>();
+}
+
+
+std::shared_ptr<ofxCEFBrowser> ClientApp::getOfxBrowserForBrowser(CefRefPtr<CefBrowser> browser) {
+	for (auto clientHandler : client_handlers_) {
+		auto ofxBrowser = clientHandler->getClient(browser);
+		if (ofxBrowser)
+			return ofxBrowser;
+	}
+	return shared_ptr<ofxCEFBrowser>();
+}
