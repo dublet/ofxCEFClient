@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <utility>
@@ -9,6 +10,7 @@
 #include "include/cef_app.h"
 
 class ClientHandler;
+class ofxCEFBrowser;
 
 class ClientApp : public CefApp,
 			    public CefBrowserProcessHandler,
@@ -156,6 +158,9 @@ public:
 	CefRefPtr<ClientHandler> getClientHandlerForBrowser(CefRefPtr<CefBrowser>);
 	
 	std::shared_ptr<ofxCEFBrowser> getOfxBrowserForBrowser(CefRefPtr<CefBrowser>);
+
+	
+	std::vector<CefRefPtr<ClientHandler>> & getClientHandlers() { return client_handlers_; }
 
 private:
 	

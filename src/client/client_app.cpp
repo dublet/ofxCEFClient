@@ -13,7 +13,7 @@
 #include "include/cef_v8.h"
 #include "util.h"  // NOLINT(build/include)
 
-
+#include "ofxCEFBrowser.h"
 
 // BEGIN Anonymous Namespace
 namespace {
